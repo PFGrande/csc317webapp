@@ -8,6 +8,7 @@
 <body>
     <header>
         <h1>Upload</h1>
+        <h3>Here you can upload video files</h3>
     </header>
 
     <nav id="navigation-bar">
@@ -21,6 +22,24 @@
             <li><a href="../html/viewpost.html">View Posts</a></li>
         </ul>
     </nav>
+
+    <form> <!-- Video Submission Form -->
+        <label for="upload-file">Submit Video: </label>
+        <input type="file" id="upload-file">
+
+        <label for="upload-title">Video Title: </label>
+        <input type="text" id="upload-title">
+
+        <label for="upload-desc">Video Description: </label>
+        <input type="text" id="upload-desc">
+
+        <input type="checkbox" id="upload-tos">
+        <label for="upload-tos"><a href="">I accept the Terms of Service</a></label>
+
+        <input type="submit">
+        
+    </form> <!-- Video Submission Form END-->
+
 
     <footer>
         <ul> <!--This is site info -->
