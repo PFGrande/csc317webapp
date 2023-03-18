@@ -12,7 +12,7 @@ a {
 
 #top-footer-image {
   position: absolute;
-  top: 80%;
+  top: 75%;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -25,9 +25,12 @@ a {
 }
 
 footer {
+  color: #CBE4DE;
+  padding-top: 2em;
+  padding-bottom: 1em;
   display: flex;
   flex-direction: column;
-  background-color: #CCD5AE;
+  background-color: #2C3333;
   top: 100%;
   position: sticky;
   width: 100%;
