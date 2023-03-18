@@ -1,8 +1,42 @@
 body {
-  padding: 50px;
+  /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden; /*disables horizontal scroll*/
 }
 
 a {
   color: #00B7FF;
 }
+
+#smoki {
+
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #CCD5AE;
+  top: 100%;
+  position: sticky;
+  width: 100%;
+  text-align: center;
+}
+
+.page-info {
+  list-style: none;
+  text-align: center;
+}
+
+#contact-info {
+  margin-left: -2.5em;
+  list-style: none;
+}
+
+/*
+.page-info > li > ul{
+  list-style: none;
+  text-align: center;
+}*/
+
