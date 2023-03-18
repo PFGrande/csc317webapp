@@ -10,8 +10,18 @@ a {
   color: #00B7FF;
 }
 
-#smoki {
+#top-footer-image {
+  position: absolute;
+  top: 80%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: end;
+}
 
+#smoki {
+  width: auto;
+  height: 10em;
 }
 
 footer {
