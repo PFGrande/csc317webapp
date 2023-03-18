@@ -7,6 +7,7 @@ margin: 0;
 }
 
 a {
+  text-decoration: none;
   color: #00B7FF;
 }
 
@@ -37,6 +38,10 @@ footer {
   text-align: center;
 }
 
+footer > a {
+  color: #CBE4DE;
+}
+
 .page-info {
   list-style: none;
   text-align: center;
@@ -53,3 +58,27 @@ footer {
   text-align: center;
 }*/
 
+#nav-options {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 3em;
+
+}
+
+#nav-options > li {
+  width: 8em;
+  text-align: center;
+  border-color: #CBE4DE;
+  border-radius: 2em;
+  background-color: #CBE4DE;
+  padding: 1.3em;
+}
+
+#nav-options > li > a {
+  color: #2C3333;
+}
