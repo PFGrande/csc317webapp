@@ -120,3 +120,40 @@ footer > a {
 #nav-options > li > a {
   color: #2C3333;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 50%;
+  margin-left: 3em;
+}
+
+form > input {
+  background-color: papayawhip;
+  margin-top: 0.3em;
+  width: 40%;
+  height: 2em;
+}
+
+form > label {
+  margin-top: 0.3em;
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+#login-image {
+  height: auto;
+  width: 35%;
+  align-self: end;
+}
+
+#login-page {
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100% !important;
+}
