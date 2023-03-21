@@ -140,16 +140,23 @@ form > label {
   margin-top: 0.3em;
 }
 
+#login-form {
+  align-items: end;
+  margin-top: 3em;
+  margin-right: 3em;
+}
+
 #login-container {
   display: flex;
   flex-direction: column;
   width: 50%;
+  align-items: start;
 }
 
 #login-image {
   height: auto;
   width: 35%;
-  align-self: end;
+
 }
 
 #login-page {
