@@ -21,6 +21,10 @@ body {
   background-repeat: no-repeat;*/
 }
 
+ul, ol {
+  list-style: none;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -223,5 +227,34 @@ form > label {
 
 .reg-checkbox-container {
   width: 40%;
+}
 
+#view-profile {
+  margin: 5em;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#profile-text {
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-videos {
+  display: flex;
+  width: 50%;
+  height: auto;
+
+}
+
+.profile-video {
+  width: auto;
+  height: 29%;
+  padding-bottom: 1em;
+}
+
+.display-user-videos {
+  background-color: #2E4F4F;
+  width: 80%;
 }
