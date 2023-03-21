@@ -16,8 +16,13 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden; /*disables horizontal scroll*/
+  width: 100%; /* changed in assignment3*/
   /*background-image: url("../images/webdevbackground.png");
   background-repeat: no-repeat;*/
+}
+
+ul, ol {
+  list-style: none;
 }
 
 header {
@@ -28,8 +33,9 @@ header {
 }
 
 a {
-  text-decoration: none;
-  color: #00B7FF;
+  color: #0E8388;
+  text-decoration: underline;
+  /*color: #00B7FF;*/
 }
 #jumping-container {
 
@@ -124,13 +130,23 @@ footer > a {
 form {
   display: flex;
   flex-direction: column;
+
+  /* moved to login-form
   justify-content: start;
   width: 50%;
-  margin-left: 3em;
+  margin-left: 3em;*/
 }
 
-form > input {
+/*adds background color to all inputs except file inputs*/
+form > input[type]:not([type="file"]) {
   background-color: papayawhip;
+  /*margin-top: 0.3em;
+  width: 40%;
+  height: 2em;*/
+}
+
+/*universal input styling*/
+form > input {
   margin-top: 0.3em;
   width: 40%;
   height: 2em;
@@ -144,6 +160,12 @@ form > label {
   align-items: end;
   margin-top: 3em;
   margin-right: 3em;
+<<<<<<< HEAD
+=======
+  justify-content: start;
+  width: 50%;
+  margin-left: 3em;
+>>>>>>> assignment3
 }
 
 #login-container {
@@ -163,4 +185,79 @@ form > label {
   display: flex !important;
   flex-direction: row !important;
   width: 100% !important;
+}
+
+#upload-container {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#upload-form {
+  width: 100%;
+  align-items: center;
+}
+
+#upload-form > * {
+  width: 25%;
+  margin-top: 0.5em;
+}
+
+#reg-container {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+#reg-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: end;
+}
+
+#reg-image-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+#reg-image {
+  width: 40%;
+  height: auto;
+}
+
+.reg-checkbox-container {
+  width: 40%;
+}
+
+#view-profile {
+  margin: 5em;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#profile-text {
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-videos {
+  display: flex;
+  width: 50%;
+  height: auto;
+
+}
+
+.profile-video {
+  width: auto;
+  height: 29%;
+  padding-bottom: 1em;
+}
+
+.display-user-videos {
+  background-color: #2E4F4F;
+  width: 80%;
 }

@@ -24,13 +24,27 @@
         </ul>
     </nav>
 
-    <div id="view-profile">
-      <p class="display-username">placeholder username</p>
-      <p class="display-email">placeholder email</p>
-      <ol class="display-user-videos"> <!-- list of videos ordered by date -->
-        <video class="user-video" src="">placeholder video</video> <!-- viewing own video may have different UI-->
 
-      </ol> <!-- list of videos END -->
+    <div id="view-profile">
+
+        <div id="profile-videos">
+            <ul class="display-user-videos"> <!-- list of videos ordered by date -->
+                <li>
+                    <!--<video class="user-video" src="https://youtu.be/oIwS357ljMA"></video> viewing own video may have different UI-->
+                    <iframe class="profile-video" width="560" height="315" src="https://www.youtube.com/embed/oIwS357ljMA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </li>
+                <li>
+                    <iframe class="profile-video" width="560" height="315" src="https://www.youtube.com/embed/oIwS357ljMA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </li>
+
+
+            </ul> <!-- list of videos END -->
+        </div>
+
+        <div id="profile-text">
+            <p class="display-username">placeholder username</p>
+            <p class="display-email">placeholder email</p>
+        </div>
 
 
     </div>
