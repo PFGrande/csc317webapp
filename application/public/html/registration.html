@@ -23,34 +23,42 @@
             <li><a href="../html/viewpost.html">View Posts</a></li>
         </ul>
     </nav>
+    <div id="reg-container">
+        <form id="reg-form"> <!-- registration form -->
+            <label for="reg-username">Username:</label>
+            <input type="text" placeholder="Username" id="reg-username">
 
-    <form> <!-- registration form -->
-        <label for="reg-username">Username:</label>
-        <input type="text" placeholder="Username" id="reg-username">
+            <label for="reg-email">Email:</label>
+            <input type="email" placeholder="Email" id="reg-email">
 
-        <label for="reg-email">Email:</label>
-        <input type="email" placeholder="Email" id="reg-email">
+            <label for="reg-pass">Password:</label>
+            <input type="password" placeholder="Password" id="reg-pass">
 
-        <label for="reg-pass">Password:</label>
-        <input type="password" placeholder="Password" id="reg-pass">
+            <label for="reg-pass">Confirm Password:</label>
+            <input type="password" placeholder="Confirm Password" id="reg-cPass">
 
-        <label for="reg-pass">Confirm Password:</label>
-        <input type="password" placeholder="Confirm Password" id="reg-cPass">
+            <div class="reg-checkbox-container">
+                <input type="checkbox" id="age-confirmation">
+                <label for="age-confirmation"><a href="">I am over 13 years old</a></label>
+            </div>
 
-        <input type="checkbox" id="age-confirmation">
-        <label for="age-confirmation"><a href="">I am over 13 years old</a></label>
+            <div class="reg-checkbox-container">
+                <input type="checkbox" id="policy-confirmation">
+                <label for="policy-confirmation"><a href="">I accept the Terms of Service & Privacy Policy</a></label>
+            </div>
 
-        <input type="checkbox" id="policy-confirmation">
-        <label for="policy-confirmation"><a href="">I accept the Terms of Service & Privacy Policy</a></label>
+            <input type="submit">
+        </form> <!-- registration form END-->
 
-        <input type="submit">
-    </form> <!-- registration form END-->
+        <div id="reg-image-container">
+            <img id="reg-image" src="https://www.mibr.gg/wp-content/themes/MIBR/images/enc-chicken.gif">
+        </div>
 
+    </div>
 
     <div id="top-footer-image">
         <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">
     </div>
-
     <footer>
         <ul class="page-info"> <!--This is site info -->
             <li>This page is not copyright protected</li>
