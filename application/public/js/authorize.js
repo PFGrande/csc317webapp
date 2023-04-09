@@ -54,11 +54,10 @@ function checkAlphanumeric (name) {
 
 }
 
-const specialChars = ['/', '*', '-', '+', '!', '@', '#', '$', '^', '&', '~', '[', ']'];
+const specialChars = ['\\/', '\\*', '\\-', '\\+', '\\!', '\\@', '\\#', '\\$', '\\^', '\\&', '\\~', '\\[', '\\]'];
 
 function validatePassword(password) {
     let missingCriteria = "Password requirements:";
-
 
     if (hasSpace(password) === true) {
         missingCriteria += "\nmust not include spaces";
@@ -80,8 +79,9 @@ function validatePassword(password) {
         missingCriteria += "\nmust contain at least one special character: / * - + ! @ # $ ^ & ~ [ ]"
     }
 
-
-    alert(missingCriteria);
+    if (missingCriteria !== "Password requirements:") {
+        alert(missingCriteria);
+    }
 
 
 
@@ -89,9 +89,10 @@ function validatePassword(password) {
 }
 
 function hasSpecialChar(inputString) {
-    for(let i = 0; i < inputString.length; i++) {
+    console.log(specialChars.length)
+    for(let i = 0; i < specialChars.length; i++) {
         //find returns -1 if value is not found in a string
-        if (inputString.find(specialChars[i]) >= 0) {
+        if (inputString.search(specialChars[i]) >= 0) {
             return true;
         }
     }
@@ -119,7 +120,7 @@ function hasNumber(inputString) {
 
 //checks if there are any spaces in the string
 function hasSpace (inputString) {
-    for(let i = 0; i < inputString.length; ) {
+    for(let i = 0; i <= inputString.length; i++) {
         if (inputString.charCodeAt(i) === 32) {
             return true;
         }
