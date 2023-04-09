@@ -1,23 +1,43 @@
+let submissionStatus = [false, false, false]; //username, password, conPassword,
+
 let usernameField = document.getElementById('reg-username');
 
 usernameField.addEventListener('change', function (usernameInput) {
-    //console.log(usernameInput.currentTarget.value);
-    validateUsername(usernameInput.currentTarget.value);
+    if (validateUsername(usernameInput.currentTarget.value) === false) {
+        submissionStatus[0] = false;
+    } else {
+        submissionStatus[0] = true;
+    }
 
 });
 
 let passwordField = document.getElementById('reg-pass');
 let conPasswordField = document.getElementById('reg-cPass');
+let password;
 
 passwordField.addEventListener('change', function (passwordInput) {
-    validatePassword(passwordInput.currentTarget.value);
-})
+    if (validatePassword(passwordInput.currentTarget.value) === false) {
+        submissionStatus[1] = false;
+    } else {
+        submissionStatus[1] = true;
+    }
+    password = passwordInput.currentTarget.value;
+});
+
+conPasswordField.addEventListener('change', function (conPasswordInput) {
+    if (conPasswordInput.currentTarget.value !== password) {
+        alert("passwords do not match")
+        submissionStatus[2] = false;
+    } else {
+        submissionStatus[2] = true;
+    }
+});
+
 
 //might make it return boolean or display a list of invalid stuff
 function validateUsername(username) {
     let missingCriteria = "Username requirements:";
-    //console.log(username);
-    //console.log(username.charCodeAt(0))
+
     if (username.toUpperCase().charCodeAt(0) < 65 || username.toUpperCase().charCodeAt(0) > 90) {
         //console.log("invalid username - must start with letters A-Z or a-z");
         missingCriteria += "\nstart with characters: A-Z or a-z";
@@ -30,7 +50,10 @@ function validateUsername(username) {
     }
 
     if (missingCriteria !== "Username requirements:") {
-        alert(missingCriteria)
+        alert(missingCriteria);
+        return false;
+    } else {
+        return true;
     }
 
 }
@@ -38,7 +61,6 @@ function validateUsername(username) {
 //Increments count if it is between numerical and alphabetic characters
 function checkAlphanumeric (name) {
     let count = 0;
-
     for (let i = 0; i < name.length; i++) {
         if (name.toUpperCase().charCodeAt(i) >= 65 && name.toUpperCase().charCodeAt(i) <= 90) {
             count++;
@@ -47,11 +69,7 @@ function checkAlphanumeric (name) {
             count++;
         }
     }
-
-
     return count;
-
-
 }
 
 const specialChars = ['\\/', '\\*', '\\-', '\\+', '\\!', '\\@', '\\#', '\\$', '\\^', '\\&', '\\~', '\\[', '\\]'];
@@ -81,10 +99,10 @@ function validatePassword(password) {
 
     if (missingCriteria !== "Password requirements:") {
         alert(missingCriteria);
+        return false; //password is invalid
+    } else {
+        return true; //password is valid
     }
-
-
-
 
 }
 
