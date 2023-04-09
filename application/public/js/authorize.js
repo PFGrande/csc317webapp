@@ -1,6 +1,3 @@
-/*document.addEventListener('DOMContentLoaded', function (ev){
-    console.log("The body has been loaded");
-});*/
 let usernameField = document.getElementById('reg-username');
 
 usernameField.addEventListener('change', function (usernameInput) {
@@ -35,6 +32,7 @@ function validateUsername(username) {
     if (missingCriteria !== "Username requirements:") {
         alert(missingCriteria)
     }
+
 }
 
 //Increments count if it is between numerical and alphabetic characters
@@ -45,16 +43,22 @@ function checkAlphanumeric (name) {
         if (name.toUpperCase().charCodeAt(i) >= 65 && name.toUpperCase().charCodeAt(i) <= 90) {
             count++;
         }
+        if (name.charCodeAt(i) >= 48 && name.charCodeAt(i) <= 57) {
+            count++;
+        }
     }
 
 
-    return count + countNumber(name);//adds numerical characters in string to alphabetic characters in string
+    return count;
 
 
 }
 
+const specialChars = ['/', '*', '-', '+', '!', '@', '#', '$', '^', '&', '~', '[', ']'];
+
 function validatePassword(password) {
     let missingCriteria = "Password requirements:";
+
 
     if (hasSpace(password) === true) {
         missingCriteria += "\nmust not include spaces";
@@ -64,38 +68,53 @@ function validatePassword(password) {
         missingCriteria += "\nmust contain 8 characters"
     }
 
-    for (let i = 0; i < password.length; i++) {
-        if (password.charCodeAt(i) >= 65 && password.charCodeAt(i) <= 90) {
-
-        }
+    if (hasUppercase(password) === false) {
+        missingCriteria += "\nmust contain at least one uppercase";
     }
 
+    if (hasNumber(password) === false) {
+        missingCriteria += "\nmust contain at least one number";
+    }
+
+    if (hasSpecialChar(password) === false) {
+        missingCriteria += "\nmust contain at least one special character: / * - + ! @ # $ ^ & ~ [ ]"
+    }
+
+
+    alert(missingCriteria);
 
 
 
 
 }
 
-function countUppercase(inputString) {
-    let uppercaseCount = 0;
+function hasSpecialChar(inputString) {
     for(let i = 0; i < inputString.length; i++) {
-        if (inputString.charCodeAt(i) >= 65 && inputString.charCodeAt(i) <= 90) {
-            uppercaseCount++;
+        //find returns -1 if value is not found in a string
+        if (inputString.find(specialChars[i]) >= 0) {
+            return true;
         }
     }
-    return uppercaseCount;
+    return false;
+}
+function hasUppercase(inputString) {
+    for(let i = 0; i < inputString.length; i++) {
+        if (inputString.charCodeAt(i) >= 65 && inputString.charCodeAt(i) <= 90) {
+            return true;
+        }
+    }
+    return false;
 
 }
 //count numerical characters in a string
-function countNumber(inputString) {
-    let numberCount = 0;
+
+function hasNumber(inputString) {
     for(let i = 0; i < inputString.length; i++) {
         if (inputString.charCodeAt(i) >= 48 && inputString.charCodeAt(i) <= 57) {
-            numberCount++;
+            return true;
         }
     }
-
-    return numberCount;
+    return false;
 }
 
 //checks if there are any spaces in the string
@@ -105,4 +124,5 @@ function hasSpace (inputString) {
             return true;
         }
     }
+    return false;
 }
