@@ -27,16 +27,16 @@
     <div id="reg-container">
         <form id="reg-form"> <!-- registration form -->
             <label for="reg-username">Username:</label>
-            <input type="text" placeholder="Username" id="reg-username">
+            <input type="text" placeholder="Username" id="reg-username" required>
 
             <label for="reg-email">Email:</label>
-            <input type="email" placeholder="Email" id="reg-email">
+            <input type="email" placeholder="Email" id="reg-email" required>
 
             <label for="reg-pass">Password:</label>
-            <input type="password" placeholder="Password" id="reg-pass">
+            <input type="password" placeholder="Password" id="reg-pass" required>
 
             <label for="reg-pass">Confirm Password:</label>
-            <input type="password" placeholder="Confirm Password" id="reg-cPass">
+            <input type="password" placeholder="Confirm Password" id="reg-cPass" required>
 
             <div class="reg-checkbox-container">
                 <input type="checkbox" id="age-confirmation" required>
@@ -48,7 +48,7 @@
                 <label for="policy-confirmation"><a href="">I accept the Terms of Service & Privacy Policy</a></label>
             </div>
 
-            <input type="submit">
+            <input type="submit" id="reg-submit">
         </form> <!-- registration form END-->
 
         <div id="reg-image-container">

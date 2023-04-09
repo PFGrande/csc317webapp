@@ -33,6 +33,26 @@ conPasswordField.addEventListener('change', function (conPasswordInput) {
     }
 });
 
+let regForm = document.getElementById('reg-submit');
+regForm.addEventListener('click', function (buttonPress) {
+   buttonPress.preventDefault();
+   if (formValidation() === true) {
+       alert("successful submission :)");
+       location.reload();
+   } else {
+       alert("form can not be submitted, check form requirements")
+   }
+
+});
+
+function formValidation() {
+    for (let i = 0; i < submissionStatus.length; i++) {
+        if (submissionStatus[i] === false) {
+            return false;
+        }
+    }
+    return true;
+}
 
 //might make it return boolean or display a list of invalid stuff
 function validateUsername(username) {
@@ -107,7 +127,6 @@ function validatePassword(password) {
 }
 
 function hasSpecialChar(inputString) {
-    console.log(specialChars.length)
     for(let i = 0; i < specialChars.length; i++) {
         //find returns -1 if value is not found in a string
         if (inputString.search(specialChars[i]) >= 0) {
