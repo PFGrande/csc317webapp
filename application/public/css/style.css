@@ -261,3 +261,8 @@ form > label {
   background-color: #2E4F4F;
   width: 80%;
 }
+
+.posts-grid {
+  width: 95%;
+  height: auto;
+}
