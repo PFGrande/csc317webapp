@@ -27,14 +27,14 @@ function buildCard(data) {
     cardTitle.setAttribute("class", "card-title");
     cardTitle.appendChild(document.createTextNode(data.title));
 
-    let cardUrl = document.createElement("a");
+    /*let cardUrl = document.createElement("a");
     cardUrl.setAttribute("href", "card-url");
-    cardUrl.appendChild(document.createTextNode(data.url));
+    cardUrl.appendChild(document.createTextNode(data.url));*/
 
     cardDiv.appendChild(cardDesc);
     cardDesc.appendChild(cardTitle);
     cardDesc.appendChild(cardImg);
-    cardDesc.appendChild(cardUrl);
+    //cardDesc.appendChild(cardUrl);
 
     //cardDiv.addEventListener('click', fadeOut);
 

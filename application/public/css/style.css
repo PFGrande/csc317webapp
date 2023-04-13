@@ -296,11 +296,21 @@ form > label {
 .card-div {
   display: flex;
   flex-direction: column;
-  height: auto;
+  justify-items: center;
+  height: 100%;
   width: 100%;
   background-color: #0E8388;
   border-width: .2em;
   border-radius: .3em;
+}
+
+.card-desc {
+  display: flex;
+  flex-direction: column;
+  justify-self: end; /*not sure why title is not moving to the bottom of the card*/
+  width: 100%;
+  height: 100%;
+
 }
 
 .card-img {
@@ -309,21 +319,18 @@ form > label {
   height: auto;
 }
 
-.card-desc {
-  justify-self: end; /*not sure why title is not moving to the bottom of the card*/
-  width: 100%;
-  height: 40%;
-}
-
 .card-title {
+  align-self: end;
   padding: .2em; /*removes text being directly on card border*/
   width: 100%;
   height: 15%;
   color: #2C3333;
   font-size: 1.5em;
+  background-color: pink;
 }
 
-.card-url {
-  height: 5%;
+/*.card-url {
+  height: 30%;
   width: 100%;
-}
+  background-color: red;
+}*/
