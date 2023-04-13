@@ -34,10 +34,26 @@ function buildCard(data) {
     cardDiv.appendChild(cardDesc);
     cardDesc.appendChild(cardTitle);
     cardDesc.appendChild(cardImg);
+
+    cardDiv.addEventListener('click', fadeOut); //adds an event listener to each card
     //cardDesc.appendChild(cardUrl);
 
     //cardDiv.addEventListener('click', fadeOut);
 
     return cardDiv;
 
+}
+
+function fadeOut(ev) {
+    let element = ev.currentTarget; //triggers event for cardDiv
+    let currentOpacity = 1; //starts fully visible
+
+    let timer = setInterval(function() {
+       currentOpacity -= 0.01; //changed from 0.05 to 0.01, 0.05 was too fast
+       element.style.opacity = currentOpacity; //changes card opacity in css
+       if (currentOpacity <= 0) {
+           element.remove(); //removes the card element that was clicked on
+           clearInterval(timer); //clears it for the next node that might be clicked on
+       }
+    });
 }

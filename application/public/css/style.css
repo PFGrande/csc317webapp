@@ -305,28 +305,27 @@ form > label {
 }
 
 .card-desc {
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  justify-self: end; /*not sure why title is not moving to the bottom of the card*/
   width: 100%;
   height: 100%;
 
 }
 
 .card-img {
-  justify-self: start;
+  justify-self: end;
   width: 100%;
   height: auto;
 }
 
 .card-title {
-  align-self: end;
+  align-self: start;
   padding: .2em; /*removes text being directly on card border*/
   width: 100%;
   height: 15%;
   color: #2C3333;
   font-size: 1.5em;
-  background-color: pink;
 }
 
 /*.card-url {
