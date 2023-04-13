@@ -1,4 +1,6 @@
 const postsDataURL = "https://jsonplaceholder.typicode.com/albums/2/photos";
+var cardCount;
+
 console.log(fetchWithJSON())
 async function fetchWithJSON() {//async function creates promise
     try {
@@ -6,6 +8,8 @@ async function fetchWithJSON() {//async function creates promise
         let data = await response.json(); //converts data to JavaScript object
         let elements = data.map(buildCard);
         document.getElementById("posts-grid").append(...elements);
+        cardCount = elements.length;
+        displayCardCount(cardCount); //displays card count when page is loaded
         //console.log(elements.length); length of array = number of cards
     } catch (err) { //promise rejected
         console.log("error: " + err); //prints error in console
@@ -45,15 +49,24 @@ function buildCard(data) {
 }
 
 function fadeOut(ev) {
+
     let element = ev.currentTarget; //triggers event for cardDiv
     let currentOpacity = 1; //starts fully visible
-
+    //displayCardCount(cardCount);
     let timer = setInterval(function() {
        currentOpacity -= 0.01; //changed from 0.05 to 0.01, 0.05 was too fast
        element.style.opacity = currentOpacity; //changes card opacity in css
        if (currentOpacity <= 0) {
            element.remove(); //removes the card element that was clicked on
+           cardCount-=1;
+           console.log(cardCount);
+           displayCardCount(cardCount);
            clearInterval(timer); //clears it for the next node that might be clicked on
        }
     });
+}
+
+function displayCardCount(cardAmt) {
+    let countElement = document.getElementById("posts-count");
+    countElement.innerText = ("Posts on Screen: " + cardAmt); //edits paragraph element in html doc
 }
