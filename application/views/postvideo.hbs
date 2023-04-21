@@ -1,63 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Post Video | WebApp</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Post Video | WebApp</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
 
-<body>
-    <header>
-        <h1>Upload</h1>
-        <h3>Here you can upload video files</h3>
-    </header>
+    <body>
+        <main>
+            <div id="upload-container">
+                <form id="upload-form"> <!-- Video Submission Form -->
+                    <label for="upload-file">Submit Video: </label>
+                    <input type="file" id="upload-file">
 
-    <nav id="navigation-bar">
-        <!--<Label for="navigation-bar">Pages:</Label> -->
-        <ul id="nav-options">
-            <li><a href="../html/Index.html">Home</a></li>
-            <li><a href="../html/login.html">Log in</a></li>
-            <li><a href="../html/postvideo.html">Post Video</a></li>
-            <li><a href="../html/profile.html">Profile</a></li>
-            <li><a href="../html/registration.html">Register</a></li>
-            <li><a href="../html/viewpost.html">View Posts</a></li>
-        </ul>
-    </nav>
-    <div id="upload-container">
-        <form id="upload-form"> <!-- Video Submission Form -->
-            <label for="upload-file">Submit Video: </label>
-            <input type="file" id="upload-file">
+                    <label for="upload-title">Video Title: </label>
+                    <input type="text" id="upload-title">
 
-            <label for="upload-title">Video Title: </label>
-            <input type="text" id="upload-title">
+                    <label for="upload-desc">Video Description: </label>
+                    <input type="text" id="upload-desc">
 
-            <label for="upload-desc">Video Description: </label>
-            <input type="text" id="upload-desc">
-
-            <div id="upload-checkbox"> <!-- used to format checkbox in webpage -->
-                <input type="checkbox" id="upload-tos">
-                <label for="upload-tos"><a href="">I accept the Terms of Service</a></label>
+                    <div id="upload-checkbox"> <!-- used to format checkbox in webpage -->
+                        <input type="checkbox" id="upload-tos">
+                        <label for="upload-tos"><a href="">I accept the Terms of Service</a></label>
+                    </div>
+                    <input type="submit">
+                </form> <!-- Video Submission Form END-->`
             </div>
-            <input type="submit">
-        </form> <!-- Video Submission Form END-->`
-    </div>
-    <div id="top-footer-image">
-        <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">
-    </div>
+        </main>
+        <div id="top-footer-image">
+            <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">
+        </div>
 
-    <footer>
-        <ul class="page-info"> <!--This is site info -->
-            <li>This page is not copyright protected</li>
-            <li><a href="">Privacy Policy</a></li>
-            <li> <!--This is Contact info -->
-                <label for="contact-info">Contact Information:</label> <!-- Unsure if label is working properly -->
-                <ul id="contact-info">
-                    <li>(111) 111-111</li>
-                    <li>email@email.com</li>
-                </ul>
-            </li> <!-- contact info end -->
-        </ul> <!-- Site info end-->
-    </footer>
-
-</body>
+    </body>
 </html>
