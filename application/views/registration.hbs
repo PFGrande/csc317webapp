@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration | WebApp</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../js/authorize.js"></script> <!-- deferred script -->
+</head>
+
+<body>
+    <header>
+        <h1>Register</h1>
+        <h3>Please register an account to post videos</h3>
+    </header>
+
+    <nav id="navigation-bar">
+        <!--<Label for="navigation-bar">Pages:</Label> -->
+        <ul id="nav-options">
+            <li><a href="../html/Index.html">Home</a></li>
+            <li><a href="../html/login.html">Log in</a></li>
+            <li><a href="../html/postvideo.html">Post Video</a></li>
+            <li><a href="../html/profile.html">Profile</a></li>
+            <li><a href="../html/registration.html">Register</a></li>
+            <li><a href="../html/viewpost.html">View Posts</a></li>
+        </ul>
+    </nav>
+    <div id="reg-container">
+        <form id="reg-form"> <!-- registration form -->
+            <label for="reg-username">Username:</label>
+            <input type="text" placeholder="Username" id="reg-username" required>
+
+            <label for="reg-email">Email:</label>
+            <input type="email" placeholder="Email" id="reg-email" required>
+
+            <label for="reg-pass">Password:</label>
+            <input type="password" placeholder="Password" id="reg-pass" required>
+
+            <label for="reg-pass">Confirm Password:</label>
+            <input type="password" placeholder="Confirm Password" id="reg-cPass" required>
+
+            <div class="reg-checkbox-container">
+                <input type="checkbox" id="age-confirmation" required>
+                <label for="age-confirmation"><a href="">I am over 13 years old</a></label>
+            </div>
+
+            <div class="reg-checkbox-container">
+                <input type="checkbox" id="policy-confirmation" required>
+                <label for="policy-confirmation"><a href="">I accept the Terms of Service & Privacy Policy</a></label>
+            </div>
+
+            <input type="submit" id="reg-submit">
+        </form> <!-- registration form END-->
+
+        <div id="reg-image-container">
+            <img id="reg-image" src="https://www.mibr.gg/wp-content/themes/MIBR/images/enc-chicken.gif" alt="chicken looking right, centering head, looking left, then pecking ground">
+        </div>
+
+    </div>
+
+    <div id="top-footer-image">
+        <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">
+    </div>
+    <footer>
+        <ul class="page-info"> <!--This is site info -->
+            <li>This page is not copyright protected</li>
+            <li><a href="">Privacy Policy</a></li>
+            <li> <!--This is Contact info -->
+                <label for="contact-info">Contact Information:</label> <!-- Unsure if label is working properly -->
+                <ul id="contact-info">
+                    <li>(111) 111-111</li>
+                    <li>email@email.com</li>
+                </ul>
+            </li> <!-- contact info end -->
+        </ul> <!-- Site info end-->
+    </footer>
+
+</body>
+</html>
