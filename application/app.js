@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require("http-errors");
 const express = require("express");
 const favicon = require('serve-favicon');
@@ -47,7 +48,7 @@ app.use((req,res,next) => {
 })
   
 
-/**
+/** note: handles error from users.js in db.query()
  * Error Handler, used to render the error html file
  * with relevant error information.
  */
