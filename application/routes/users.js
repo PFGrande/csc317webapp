@@ -5,7 +5,7 @@ var db = require('../conf/database');
 /*keep watching video at 1:06:55 : CSC 317 Joins, db setup...*/
 router.get('/', async function(req, res, next) {
   //res.send('respond with a resource');
-  db.query('select * from users;', function(error, rows){
+  /*db.query('select * from users;', function(error, rows){
     if(error) {
       next(error); //error handled if there is one, anything passed into next() is assumed to be an error except if 'route' is passed in
 
@@ -13,7 +13,14 @@ router.get('/', async function(req, res, next) {
       //user "sources" in browser dev tools to view the json objects
       res.status(200).json({rows}); //returns table rows to the front end
     }
-  })
+  })*/
+  try {
+    let [rows, fields] = await db.query(`select * from users`); //promises for query and execute return array
+    res.status(200).json({rows, fields})
+  } catch (error) {
+    next(error);
+  }
+
 });
 
 

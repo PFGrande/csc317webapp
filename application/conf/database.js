@@ -10,6 +10,6 @@ const pool = mysql.createPool({
     maxIdle: 10,
     idleTimeout: 6000,
     queueLimit: 0
-});
+}).promise(); //converts to promise pull
 
 module.exports = pool;
