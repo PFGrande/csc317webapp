@@ -35,7 +35,7 @@ conPasswordField.addEventListener('change', function (conPasswordInput) {
 
 let regForm = document.getElementById('reg-submit');
 regForm.addEventListener('click', function (buttonPress) {
-   buttonPress.preventDefault();
+   //buttonPress.preventDefault(); 
    if (formValidation() === true) {
        alert("successful submission :)");
        location.reload();
