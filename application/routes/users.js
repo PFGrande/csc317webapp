@@ -26,7 +26,7 @@ router.get('/', async function(req, res, next) {
 
 /*routing for localhost:3000/user/registration */
 router.post('/registration', async function(req, res, next) {
-  console.log(req);
+  console.log(req.body);
   res.end();
 });
 

@@ -10,27 +10,26 @@
 <body>
     <main>
         <div id="reg-container">
-            <!-- -->
-            <form id="reg-form" action="action.php" method="POST" enctype="application/x-www-form-urlencoded"> <!-- registration form -->
+            <form id="reg-form" action="/users/registration" method="POST" enctype="application/x-www-form-urlencoded"> <!-- registration form -->
                 <label for="reg-username">Username:</label>
-                <input type="text" placeholder="Username" id="reg-username" required>
+                <input type="text" placeholder="Username" id="reg-username" name="username" required>
 
                 <label for="reg-email">Email:</label>
-                <input type="email" placeholder="Email" id="reg-email" required>
+                <input type="email" placeholder="Email" id="reg-email" name="email" required>
 
                 <label for="reg-pass">Password:</label>
-                <input type="password" placeholder="Password" id="reg-pass" required>
+                <input type="password" placeholder="Password" id="reg-pass" name="password" required>
 
                 <label for="reg-pass">Confirm Password:</label>
-                <input type="password" placeholder="Confirm Password" id="reg-cPass" required>
+                <input type="password" placeholder="Confirm Password" id="reg-cPass" name="confirm-password" required>
 
                 <div class="reg-checkbox-container">
-                    <input type="checkbox" id="age-confirmation" required>
+                    <input type="checkbox" id="age-confirmation" name="ageCheck" required>
                     <label for="age-confirmation"><a href="">I am over 13 years old</a></label>
                 </div>
 
                 <div class="reg-checkbox-container">
-                    <input type="checkbox" id="policy-confirmation" required>
+                    <input type="checkbox" id="policy-confirmation" name="tosCheck" required>
                     <label for="policy-confirmation"><a href="">I accept the Terms of Service & Privacy Policy</a></label>
                 </div>
 
