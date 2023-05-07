@@ -25,6 +25,7 @@ router.get('/', async function(req, res, next) {
       res.status(200).json({rows}); //returns table rows to the front end
     }
   })*/
+  /* Prints registration data on  */
   try {
     let [rows, fields] = await db.query(`select * from users`); //promises for query and execute return array
     res.status(200).json({rows, fields})
@@ -34,14 +35,55 @@ router.get('/', async function(req, res, next) {
 
 });
 
+/*server side validation */
+/*
+router.use("/registration", function(req, res, next) {
+  //it is optional to validate data here, assume data is already clean due to using validation.js
+});*/
+
 /*routing for localhost:3000/user/registration */
 //Left off at 36:13, remember to rewatch bcrypt lecture
 //request handler for the registration page, parameters: route path, handler function
 router.post('/registration', async function(req, res, next) {
-  console.log(req.body);
-  res.end();
-  //uniqueness checks will happen here
+  //destructure json object.
+  let {username, email, password} = req.body;
+
+  //Check uniqueness of values:
+  try { //promise
+    //Username uniqueness check
+    var [rows, fields] = await db.execute(`select id from users where username=?;`,[username]); //don't use ${username}, could lead to SQL injection
+    //passing username as array can also lead to injection, to avoid injection we use db.execute which
+    // db.execute removes floating characters from the username
+
+    //rows.length = # of usernames that matched the input username.
+    if (rows && rows.length > 0) {// if no similar usernames found, redirect to registration page
+      return res.redirect('/registration');//function breaks & website refresh if matching username found (rows.length > 0)
+    }
+
+    //email uniqueness check
+    var [rows, fields] = await db.execute(`select id from users where email=?;`,[email]);
+
+    if (rows && rows.length > 0) {
+      return res.redirect('/registration');//function breaks & website refresh if matching email found (rows.length > 0)
+    }
+
+    //insert data into the database (inserts rows into DB)
+    //result object = new row being input, fields is the columns?
+    var [resultObject, fields] = await db.execute(`INSERT INTO users (username, email, password) value (?,?,?);`, [username, email, password]);
+
+    console.log(resultObject); //print object being input into user table
+    res.end(); //ends request
+
+  }catch (error) {
+    next(error);
+  }
+
+  //console.log(req.body); prints user data
+  //res.end(); send response back to the client
+  //uniqueness checks will happen here (for practice)
 });
+
+
 
 
 module.exports = router;
