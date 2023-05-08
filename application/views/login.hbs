@@ -5,12 +5,12 @@
     <main id="login-content">
         <div id="login-page">
             <!-- Submission Section -->
-            <form id="login-form">
+            <form id="login-form" action="/users/login" method="POST" enctype="application/x-www-form-urlencoded">
                 <label for="log-username">Username:</label>
-                <input type="text" placeholder="Username" id="log-username">
+                <input type="text" placeholder="Username" id="log-username" name="username">
 
                 <label for="log-pass">Password:</label>
-                <input type="password" placeholder="Password" id="log-pass">
+                <input type="password" placeholder="Password" id="log-pass" name="password">
 
                 <input type="submit">
             </form>

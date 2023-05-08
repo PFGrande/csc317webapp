@@ -82,7 +82,7 @@ router.post('/registration', async function(req, res, next) {
     if (resultObject && resultObject.affectedRows) { //if resultObject != NULL && resultObject.affectedRows != NULL
       res.redirect('/login'); //object inserted into row, proceed to login page
     } else {
-      alert("user already exists");
+      //alert("user already exists");
       return res.redirect('/registration'); //object not inserted, reload registration page
     }
 
@@ -96,7 +96,30 @@ router.post('/registration', async function(req, res, next) {
   //uniqueness checks will happen here (for practice)
 });
 
+//LOG IN:
+//Define route and use route handler function for login:
+router.post('/login', async function(req, res, next) {
+  //execute data check on the database: (should I assume the data being submitted has been sanitized?)
+  let {username, password} = req.body; //I believe login request only contains these two values in the request body
+  var [rows, fields] = await db.execute(`SELECT * FROM csc317.users where username=? AND password=?;`, [username, password]); //if a row is returned, login user
 
+  if (rows && rows.length > 0) { // rows != null AND if password AND username match a row in the DB...
+    //user logged in
+    /*
+    Ideas for UI after login:
+    add function that removes login and registration button and replaces them with the sign out button.
+    Might edit UI a bit if I have spare time.
+    Maybe create drop down / burger element for these values only and leave the rest of the nav bar alone
+     */
+    //alert("your are now logged in");
+    console.log("your are now logged in");
+  } else {
+    //alert("credentials may be wrong or user does not exist");
+    console.log("your are now logged in");
+  }
+
+
+});
 
 
 module.exports = router;
