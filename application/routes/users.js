@@ -82,6 +82,7 @@ router.post('/registration', async function(req, res, next) {
     if (resultObject && resultObject.affectedRows) { //if resultObject != NULL && resultObject.affectedRows != NULL
       res.redirect('/login'); //object inserted into row, proceed to login page
     } else {
+      alert("user already exists");
       return res.redirect('/registration'); //object not inserted, reload registration page
     }
 
