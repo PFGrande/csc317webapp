@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
+/*
+removed alerts from this file because they are being executed outside of the browser,
+outside of the browser the method is not defined.
+ */
+
 /* GET users listing. (localhost:3000/users) */
 /*keep watching video at 1:06:55 : CSC 317 Joins, db setup...*/
 
@@ -115,7 +120,7 @@ router.post('/login', async function(req, res, next) {
     console.log("your are now logged in");
   } else {
     //alert("credentials may be wrong or user does not exist");
-    console.log("your are now logged in");
+    console.log("credentials may be wrong or user does not exist");
   }
 
 
