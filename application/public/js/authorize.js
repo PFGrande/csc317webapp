@@ -1,4 +1,4 @@
-let submissionStatus = [false, false, false]; //username, password, conPassword,
+let submissionStatus = [false, false, false]; //username, password, conPassword
 
 let usernameField = document.getElementById('reg-username');
 
@@ -51,6 +51,13 @@ function formValidation() {
             return false;
         }
     }
+
+    //if 1 or no checkboxes is checked, form is false. Statement is used to show reason why form can not be accepted.
+    if (!document.getElementById('policy-confirmation').checked || !document.getElementById('age-confirmation').checked) {
+        alert("User did not accept the terms of service");
+        return false;
+    }
+
     return true;
 }
 
