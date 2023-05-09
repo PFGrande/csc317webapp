@@ -75,7 +75,7 @@ router.post('/registration', async function(req, res, next) {
     }
 
     //encrypt password before inserting it into db
-    var hashedPassword = await bcrypt.hash(password, 3);
+    let hashedPassword = await bcrypt.hash(password, 3);
 
     //insert data into the database (inserts rows into DB)
     //result object = new row being input, fields is the columns?
@@ -89,9 +89,8 @@ router.post('/registration', async function(req, res, next) {
     //This statement checks for a successful insert.
     if (resultObject && resultObject.affectedRows) { //if resultObject != NULL && resultObject.affectedRows != NULL
       console.log("user has been created")
-      res.redirect('/login'); //object inserted into row, proceed to login page
+      return res.redirect('/login'); //object inserted into row, proceed to login page
     } else {
-      //alert("user already exists");
       console.log("user already exists")
       return res.redirect('/registration'); //object not inserted, reload registration page
 
@@ -112,13 +111,32 @@ router.post('/registration', async function(req, res, next) {
 router.post('/login', async function(req, res, next) {
   //execute data check on the database: (should I assume the data being submitted has been sanitized?)
   let {username, password} = req.body; //I believe login request only contains these two values in the request body
-  var [rows, fields] = await db.execute(`SELECT * FROM csc317.users where username=? AND password=?;`, [username, password]); //if a row is returned, login user
 
   if (!username || !password) { //make sure username and password fields aren't empty
     return res.redirect('/login');
   }
 
-  if (rows && rows.length > 0) { // rows != null AND if password AND username match a row in the DB...
+  //let hashedPassword = await bcrypt.hash(password, 3); //hashes password
+
+  //console.log(hashedPassword +"===============================================")
+
+  //Search for hashed password and username in DB
+  var [rows, fields] = await db.execute(`SELECT id,username,password,email FROM users where username=?;`, [username]); //if a row is returned, login user
+
+  let user = rows[0]; //grabs user in row
+  if (!user) {
+    return res.redirect("/login");
+  } else {
+    var passwordsMatch = await bcrypt.compare(password, user.password);
+      if(passwordsMatch) {
+        return res.redirect("/");
+      } else {
+        return res.redirect("/login");
+      }
+  }
+
+
+  //if (rows && rows.length > 0) { // rows != null AND if password AND username match a row in the DB...
     //user logged in
     /*
     Ideas for UI after login:
@@ -127,13 +145,13 @@ router.post('/login', async function(req, res, next) {
     Maybe create drop down / burger element for these values only and leave the rest of the nav bar alone
      */
     //alert("your are now logged in");
-    console.log("your are now logged in");
-    return res.redirect("/");
-  } else {
+    //console.log("your are now logged in");
+    //return res.redirect("/");
+  //} else {
     //alert("credentials may be wrong or user does not exist");
-    console.log("credentials may be wrong or user does not exist");
-    return res.redirect("/login")
-  }
+   // console.log("credentials may be wrong or user does not exist");
+    //return res.redirect("/login")
+  //}
 });
 
 router.post('/logout', function (req, res, next) {
