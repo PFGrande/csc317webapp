@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
+var bcrypt = require('bcrypt');
+
 /*
 removed alerts from this file because they are being executed outside of the browser,
 outside of the browser the method is not defined.
@@ -73,10 +75,11 @@ router.post('/registration', async function(req, res, next) {
     }
 
     //encrypt password before inserting it into db
+    var hashedPassword = await bcrypt.hash(password, 3);
 
     //insert data into the database (inserts rows into DB)
     //result object = new row being input, fields is the columns?
-    var [resultObject, fields] = await db.execute(`INSERT INTO users (username, email, password) value (?,?,?);`, [username, email, password]);
+    var [resultObject, fields] = await db.execute(`INSERT INTO users (username, email, password) value (?,?,?);`, [username, email, hashedPassword]);
 
     //console.log(resultObject); //print object being input into user table, result object contains the id for new row :)
     //res.end(); //ends request
@@ -85,10 +88,13 @@ router.post('/registration', async function(req, res, next) {
     //resultObject will not be null & the affected rows should be 1.
     //This statement checks for a successful insert.
     if (resultObject && resultObject.affectedRows) { //if resultObject != NULL && resultObject.affectedRows != NULL
+      console.log("user has been created")
       res.redirect('/login'); //object inserted into row, proceed to login page
     } else {
       //alert("user already exists");
+      console.log("user already exists")
       return res.redirect('/registration'); //object not inserted, reload registration page
+
     }
 
 
@@ -128,9 +134,10 @@ router.post('/login', async function(req, res, next) {
     console.log("credentials may be wrong or user does not exist");
     return res.redirect("/login")
   }
-
-
 });
 
+router.post('/logout', function (req, res, next) {
+
+});
 
 module.exports = router;

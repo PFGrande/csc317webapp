@@ -36,11 +36,13 @@ conPasswordField.addEventListener('change', function (conPasswordInput) {
 let regForm = document.getElementById('reg-submit');
 regForm.addEventListener('click', function (buttonPress) {
    //buttonPress.preventDefault();
+    //removed alerts because they are misleading. They occur before the databse checks leading the
+    //user to believe their account has been created before checking for duplicates in the DB.
    if (formValidation() === true) {
-       alert("successful submission :)");
-       location.reload();
+       //alert("successful submission :)");
+       //location.reload();
    } else {
-       alert("form can not be submitted, check form requirements");
+       //alert("form can not be submitted, check form requirements");
    }
 
 });
