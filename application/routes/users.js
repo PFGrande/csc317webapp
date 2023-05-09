@@ -108,6 +108,10 @@ router.post('/login', async function(req, res, next) {
   let {username, password} = req.body; //I believe login request only contains these two values in the request body
   var [rows, fields] = await db.execute(`SELECT * FROM csc317.users where username=? AND password=?;`, [username, password]); //if a row is returned, login user
 
+  if (!username || !password) { //make sure username and password fields aren't empty
+    return res.redirect('/login');
+  }
+
   if (rows && rows.length > 0) { // rows != null AND if password AND username match a row in the DB...
     //user logged in
     /*
@@ -118,9 +122,11 @@ router.post('/login', async function(req, res, next) {
      */
     //alert("your are now logged in");
     console.log("your are now logged in");
+    return res.redirect("/");
   } else {
     //alert("credentials may be wrong or user does not exist");
     console.log("credentials may be wrong or user does not exist");
+    return res.redirect("/login")
   }
 
 
