@@ -47,6 +47,7 @@ app.use(sessions({
     secret: "csc 317 secret",
     resave: false,
     saveUninitialized: true, // generate session data for data for non-logged in users
+    store: sessionStore, //store the session in the sessionStore
     cookie: { // cookie object
         httpOnly: true, // inaccessible by client-side JS
         secure: false // security authorities not set up so we are using unencrypted traffic
@@ -56,6 +57,10 @@ app.use(sessions({
 //print session | later on: move data from session obj to the template so handlebars can use it:
 app.use(function (req, res, next) {
    console.log(req.session);
+   if (req.session.user) { //check if session exists
+       res.locals.isLoggedIn = true; //puts data on all templates
+       res.locals.user = req.session.user;
+   }
    next();
 });
 

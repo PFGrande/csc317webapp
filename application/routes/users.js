@@ -129,6 +129,15 @@ router.post('/login', async function(req, res, next) {
   } else {
     var passwordsMatch = await bcrypt.compare(password, user.password);
       if(passwordsMatch) {
+        //add session object to DB.
+        //session object contains: ID, email, username
+        //Using the whole object would provide unnecessary data, such as the hashed password.
+        req.session.user = {
+          userID: user.id,
+          email: user.email,
+          username: user.username
+
+        };
         return res.redirect("/");
       } else {
         return res.redirect("/login");

@@ -2,10 +2,18 @@
     <!--<Label for="navigation-bar">Pages:</Label> -->
     <ul id="nav-options">
         <li><a href="../html/Index.html">Home</a></li>
-        <li><a href="../html/login.html">Log in</a></li>
+        {{#if isLoggedIn}} <!-- if not logged in, show the log in button -->
+
+        {{else}}
+            <li><a href="../html/login.html">Log in</a></li>
+        {{/if}}
+        <!-- <li><a href="../html/login.html">Log in</a></li> -->
         <li><a href="../html/postvideo.html">Post Video</a></li>
         <li><a href="../html/profile.html">Profile</a></li>
         <li><a href="../html/registration.html">Register</a></li>
         <li><a href="../html/viewpost.html">View Posts</a></li>
     </ul>
+    <!-- log this}} prints context object (in this case it's res.locals.isLoggedIn -->
+
+
 </nav>
