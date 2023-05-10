@@ -28,6 +28,7 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
+//session module
 const sessionStore = new mysqlStore({/*empty because we are using default options*/}, require('./conf/database'));
 
 app.use(logger("dev"));
