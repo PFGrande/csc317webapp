@@ -10,6 +10,8 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 const app = express();
+const sessions = require('express-session');
+const mysqlStore = require('express-mysql-session')(sessions)
 
 app.engine(
   "hbs",
@@ -26,6 +28,7 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
+const sessionStore = new mysqlStore({/*empty because we are using default options*/}, require('./conf/database'));
 
 app.use(logger("dev"));
 app.use(express.json());
