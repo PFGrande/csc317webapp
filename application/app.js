@@ -10,8 +10,10 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 const app = express();
+
+//import express session module
 const sessions = require('express-session');
-const mysqlStore = require('express-mysql-session')(sessions)
+const mysqlStore = require('express-mysql-session')(sessions);
 
 app.engine(
   "hbs",
@@ -28,16 +30,35 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-//session module
+//create mysql store object that accesses the application's database
 const sessionStore = new mysqlStore({/*empty because we are using default options*/}, require('./conf/database'));
+//documentation of default options under options section: https://www.npmjs.com/package/express-mysql-session#options
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser("csc 317 secret"));
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+//session configuration
+app.use(sessions({
+    secret: "csc 317 secret",
+    resave: false,
+    saveUninitialized: true, // generate session data for data for non-logged in users
+    cookie: { // cookie object
+        httpOnly: true, // inaccessible by client-side JS
+        secure: false // security authorities not set up so we are using unencrypted traffic
+    }
+}));
+
+//print session | later on: move data from session obj to the template so handlebars can use it:
+app.use(function (req, res, next) {
+   console.log(req.session);
+   next();
+});
+
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
