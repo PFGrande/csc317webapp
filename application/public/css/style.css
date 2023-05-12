@@ -137,6 +137,21 @@ form {
   width: 50%;
   margin-left: 3em;*/
 }
+/* fix formatting for button (it's within a form, most likely the problem)*/
+#logout-button {
+
+  width: 8em;
+  text-align: center;
+  border-color: #CBE4DE;
+  border-radius: 2em;
+  background-color: #CBE4DE;
+  padding: 1.3em;
+}
+
+#logout-form {
+  display: block !important;
+
+}
 
 /*adds background color to all inputs except file inputs*/
 form > input[type]:not([type="file"]) {
