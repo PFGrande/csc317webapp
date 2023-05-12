@@ -22,8 +22,11 @@ router.get('/viewpost', function (req, res) { //set client ID later on.
   res.render('viewpost', {title: 'View Posts', description: 'Video for your viewing pleasure'});
 });
 
-router.get('/profile', function (req, res) {
+// Moved to users.js
+/*
+router.get('/profile/:id(\\d+)', function (req, res) {
   res.render('profile', {title: 'Profile'})
 });
+*/
 
 module.exports = router;

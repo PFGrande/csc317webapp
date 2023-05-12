@@ -163,8 +163,25 @@ router.post('/login', async function(req, res, next) {
   //}
 });
 
+/*ensure that only profile owners can view their own profile*/
+/*
+router.use(function (req, res, next) {
+  if(req.session.user) {
+    next();
+  } else {
+    return res.redirect('/login');
+  }
+});
+*/
+router.get("/profile/:id(\\d+)", function (req, res) {
+  res.render('profile', {title: 'Profile'});
+});
+
+/*
 router.post('/logout', function (req, res, next) {
 
 });
+*/
+
 
 module.exports = router;

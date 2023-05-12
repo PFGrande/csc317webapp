@@ -56,7 +56,7 @@ app.use(sessions({
 
 //print session | later on: move data from session obj to the template so handlebars can use it:
 app.use(function (req, res, next) {
-   console.log(req.session);
+   //console.log(req.session);
    if (req.session.user) { //check if session exists
        res.locals.isLoggedIn = true; //puts data on all templates
        res.locals.user = req.session.user;
