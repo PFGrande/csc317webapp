@@ -1,5 +1,5 @@
 html {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; /*I like this font :)*/
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif !important; /*I like this font :)*/
 }
 
 /*video sources of:
@@ -100,6 +100,7 @@ footer > a {
   top: 0;
   position: fixed;
   background-color: #2E4F4F;
+  /*box-sizing: unset !important;*/
 
 }
 

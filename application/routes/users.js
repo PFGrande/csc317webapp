@@ -88,10 +88,10 @@ router.post('/registration', async function(req, res, next) {
     //resultObject will not be null & the affected rows should be 1.
     //This statement checks for a successful insert.
     if (resultObject && resultObject.affectedRows) { //if resultObject != NULL && resultObject.affectedRows != NULL
-      console.log("user has been created")
+      //console.log("user has been created")
       return res.redirect('/login'); //object inserted into row, proceed to login page
     } else {
-      console.log("user already exists")
+      //console.log("user already exists")
       return res.redirect('/registration'); //object not inserted, reload registration page
 
     }
@@ -124,8 +124,13 @@ router.post('/login', async function(req, res, next) {
   var [rows, fields] = await db.execute(`SELECT id,username,password,email FROM users where username=?;`, [username]); //if a row is returned, login user
 
   let user = rows[0]; //grabs user in row
+
   if (!user) {
-    return res.redirect("/login");
+    req.flash("error", `Login Failed: Invalid Username or Password`); //user not found in DB
+    req.session.save(function(err) { //ensures async function (req.flash) finishes executing before value is returned.
+        return res.redirect("/login");
+
+    })
   } else {
     var passwordsMatch = await bcrypt.compare(password, user.password);
       if(passwordsMatch) {
@@ -177,11 +182,17 @@ router.get("/profile/:id(\\d+)", function (req, res) {
   res.render('profile', {title: 'Profile'});
 });
 
-/*
+//destroy current user's session
 router.post('/logout', function (req, res, next) {
-
+  req.session.destroy(function (err) {
+    //in case of an error (error handler)
+      if (err) {
+        next(error);
+      }
+      return res.redirect('/');
+  })
 });
-*/
+
 
 
 module.exports = router;

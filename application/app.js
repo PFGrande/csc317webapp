@@ -14,6 +14,7 @@ const app = express();
 //import express session module
 const sessions = require('express-session');
 const mysqlStore = require('express-mysql-session')(sessions);
+const flash = require('express-flash');
 
 app.engine(
   "hbs",
@@ -22,7 +23,12 @@ app.engine(
     partialsDir: path.join(__dirname, "views/partials"), // where to look for partials
     extname: ".hbs", //expected file extension for handlebars files
     defaultLayout: "layout", //default layout for app, general template for all pages in app
-    helpers: {}, //adding new helpers to handlebars for extra functionality
+    helpers: {
+        nonEmptyObject: function(obj) {
+            //return: objectExists && passed in value is an object && object's set of keys > 0
+            return obj && obj.constructor === Object && Object.keys(obj).length > 0;
+        }
+    }, //adding new helpers to handlebars for extra functionality
   })
 );
 
@@ -54,9 +60,13 @@ app.use(sessions({
     }
 }));
 
+//flash needs sessions, flash must be placed after sessions
+//on every request, flash message will occur
+app.use(flash())
+
 //print session | later on: move data from session obj to the template so handlebars can use it:
 app.use(function (req, res, next) {
-   //console.log(req.session);
+   console.log(req.session); //for debugging, prints request for session
    if (req.session.user) { //check if session exists
        res.locals.isLoggedIn = true; //puts data on all templates
        res.locals.user = req.session.user;
