@@ -164,15 +164,15 @@ router.post('/login', async function(req, res, next) {
 });
 
 /*ensure that only profile owners can view their own profile*/
-/*
+
 router.use(function (req, res, next) {
   if(req.session.user) {
-    next();
+      next(); //if signed in, allow user to see profile
   } else {
-    return res.redirect('/login');
+      return res.redirect('/login'); // if not signed in, send to login page
   }
 });
-*/
+
 router.get("/profile/:id(\\d+)", function (req, res) {
   res.render('profile', {title: 'Profile'});
 });
