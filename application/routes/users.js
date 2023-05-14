@@ -130,7 +130,7 @@ router.post('/login', async function(req, res, next) {
     req.session.save(function(err) { //ensures async function (req.flash) finishes executing before value is returned.
         return res.redirect("/login");
 
-    })
+    });
   } else {
     var passwordsMatch = await bcrypt.compare(password, user.password);
       if(passwordsMatch) {
@@ -141,11 +141,19 @@ router.post('/login', async function(req, res, next) {
           userID: user.id,
           email: user.email,
           username: user.username
-
         };
-        return res.redirect("/");
+        req.flash("success", `Login Successful`);
+
+        req.session.save(function(err) {
+            return res.redirect("/");
+        });
+
       } else {
-        return res.redirect("/login");
+        req.flash("error", `Login Failed: Invalid Username or Password`);
+        req.session.save(function(err) { //ensures async function (req.flash) finishes executing before value is returned.
+          return res.redirect("/login");
+
+        });
       }
   }
 

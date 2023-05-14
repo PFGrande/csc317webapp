@@ -148,15 +148,20 @@ form {
   width: 50%;
   margin-left: 3em;*/
 }
-/* fix formatting for button (it's within a form, most likely the problem)*/
-#logout-button {
-
+/* logout button formatting fixed for nav bar*/
+#logout-button { /*button now looks like the anchor elements*/
+  background-color: transparent;
+  border: transparent;
+  text-decoration: underline #2C3333;
+  color: #2C3333;
+  cursor: pointer;
+/*
   width: 8em;
   text-align: center;
   border-color: #CBE4DE;
   border-radius: 2em;
   background-color: #CBE4DE;
-  padding: 1.3em;
+  padding: 1.3em;*/
 }
 
 #logout-form {
