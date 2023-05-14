@@ -1,4 +1,4 @@
-html {
+html.custom-doc {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif !important; /*I like this font :)*/
 }
 
@@ -8,7 +8,7 @@ html {
  Smoke grenade: https://www.youtube.com/watch?v=k2DgKWf4ZN4&ab_channel=Meepception
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
-body {
+body.custom-body {
   /*padding: 50px;*/
   background-color: #CBE4DE;
   padding-top: 5%;
@@ -43,6 +43,16 @@ a {
   height: auto;
   display: flex;
   justify-content: center;
+}
+
+
+.title {
+  font: 2em "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+.sub-title {
+  font: 1.2em "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-weight: bold;
 }
 
 #jumping-image {
@@ -177,12 +187,12 @@ form > label {
   align-items: end;
   margin-top: 3em;
   margin-right: 3em;
-<<<<<<< HEAD
-=======
+/*<<<<<<< HEAD
+=======*/
   justify-content: start;
   width: 50%;
   margin-left: 3em;
->>>>>>> assignment3
+/*>>>>>>> assignment3 */
 }
 
 #login-container {
