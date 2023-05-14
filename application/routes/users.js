@@ -191,14 +191,15 @@ router.get("/profile/:id(\\d+)", function (req, res) {
 });
 
 //destroy current user's session
+//there can't be a flash message here because session gets destroyed, flash message requries a session
 router.post('/logout', function (req, res, next) {
   req.session.destroy(function (err) {
     //in case of an error (error handler)
       if (err) {
-        next(error);
+        next(err);
       }
       return res.redirect('/');
-  })
+  });
 });
 
 
