@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
-var { isLoggedIn, isMyProfile } = require("../middleware/auth");
+var { isLoggedIn, isMyProfile } = require("../middleware/auth.js");
 
 /*
 removed alerts from this file because they are being executed outside of the browser,
@@ -178,21 +178,21 @@ router.post('/login', async function(req, res, next) {
 });
 
 /*ensure that only profile owners can view their own profile*/
-
+/* transfered code to auth document, why does it have a different effect than my middleware? is it because of "return"?
 router.use(function (req, res, next) {
   if(req.session.user) {
       next(); //if signed in, allow user to see profile
   } else {
       return res.redirect('/login'); // if not signed in, send to login page
   }
-});
+});*/
 
 
 //router.use("/profile/:id(\\d+)", isMyProfile);
 //router.use("/profile/:id(\\d+)", isLoggedIn);
 //ensures ID is integer
-router.get("/profile/:id(\\d+)", isMyProfile, function (req, res) {
-  //console.log(req.params); prints id of logged in user
+router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, function (req, res) {
+  console.log(req.params); //prints id of logged in user
   res.render('profile', {title: 'Profile'});
 });
 
