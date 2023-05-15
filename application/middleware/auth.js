@@ -5,7 +5,7 @@ module.exports = {
         if (req.session.user) {
             next();
         } else {
-            req.flash("error", `User must be logged in.`); //user not found in DB
+            req.flash("error", `User must be logged in`); //user not found in DB
             req.session.save(function(err) { //ensures async function (req.flash) finishes executing before value is returned.
                 if (err) next(err);
                 res.redirect('/login');
@@ -20,7 +20,7 @@ module.exports = {
         if (req.session.user.userID == id) { // Unnecessary because of "isLoggedIn" middleware: "req.session.user &&"
             next(); // next('route') goes directly to route handler, anything else inside of next is considered an error
         } else {
-            req.flash("error", `That profile is private.`);
+            req.flash("error", `That profile is private`);
             req.session.save(function (err) {
                 if (err) {
                     next(err);

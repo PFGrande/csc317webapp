@@ -26,7 +26,7 @@ passwordField.addEventListener('change', function (passwordInput) {
 
 conPasswordField.addEventListener('change', function (conPasswordInput) {
     if (conPasswordInput.currentTarget.value !== password) {
-        console.log("===================passwords do not match===================")
+        //console.log("===================passwords do not match===================")
         submissionStatus[2] = false;
     } else {
         submissionStatus[2] = true;
@@ -40,10 +40,10 @@ regForm.addEventListener('click', function (buttonPress) {
     //user to believe their account has been created before checking for duplicates in the DB.
    if (formValidation() === true) {
        //alert("successful submission :)");
-       console.log("===============form valid==================")
+       //console.log("===============form valid==================")
        //location.reload();
    } else {
-       console.log("====================form can not be submitted, check form requirements===============");
+       //console.log("====================form can not be submitted, check form requirements===============");
    }
 
 });

@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var { isLoggedIn, isMyProfile } = require("../middleware/auth.js");
+const {usernameCheck, isUsernameUnique} = require("../middleware/validation");
 
 /*
 removed alerts from this file because they are being executed outside of the browser,
@@ -52,28 +53,28 @@ router.use("/registration", function(req, res, next) {
 /*routing for localhost:3000/user/registration */
 //Left off at 36:13, remember to rewatch bcrypt lecture
 //request handler for the registration page, parameters: route path, handler function
-router.post('/registration', async function(req, res, next) {
+router.post('/registration', usernameCheck, isUsernameUnique, async function(req, res, next) {
   //destructure json object.
   let {username, email, password} = req.body;
 
   //Check uniqueness of values: A sessionID can be created after the user's account is inserted into the database (not necessary)
   try { //promise
     //Username uniqueness check
-    var [rows, fields] = await db.execute(`select id from users where username=?;`,[username]); //don't use ${username}, could lead to SQL injection
+    /*var [rows, fields] = await db.execute(`select id from users where username=?;`,[username]); //don't use ${username}, could lead to SQL injection
     //passing username as array can also lead to injection, to avoid injection we use db.execute which
     // db.execute removes floating characters from the username
 
     //rows.length = # of usernames that matched the input username.
     if (rows && rows.length > 0) {// if no similar usernames found, redirect to registration page
       return res.redirect('/registration');//function breaks & website refresh if matching username found (rows.length > 0)
-    }
+    }*/
 
     //email uniqueness check
-    var [rows, fields] = await db.execute(`select id from users where email=?;`,[email]);
+    /*var [rows, fields] = await db.execute(`select id from users where email=?;`,[email]);
 
     if (rows && rows.length > 0) {
       return res.redirect('/registration');//function breaks & website refresh if matching email found (rows.length > 0)
-    }
+    }*/
 
     //encrypt password before inserting it into db
     let hashedPassword = await bcrypt.hash(password, 3);
