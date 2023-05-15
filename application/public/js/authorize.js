@@ -57,7 +57,7 @@ function formValidation() {
 
     //if 1 or no checkboxes is checked, form is false. Statement is used to show reason why form can not be accepted.
     if (!document.getElementById('policy-confirmation').checked || !document.getElementById('age-confirmation').checked) {
-        alert("User did not accept the terms of service");
+        //alert("User did not accept the terms of service");
         return false;
     }
 
@@ -80,7 +80,7 @@ function validateUsername(username) {
     }
 
     if (missingCriteria !== "Username requirements:") {
-        alert(missingCriteria);
+        //alert(missingCriteria);
         return false;
     } else {
         return true;
@@ -128,7 +128,7 @@ function validatePassword(password) {
     }
 
     if (missingCriteria !== "Password requirements:") {
-        alert(missingCriteria);
+        //alert(missingCriteria);
         return false; //password is invalid
     } else {
         return true; //password is valid

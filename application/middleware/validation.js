@@ -1,5 +1,6 @@
 var validator = require('validator'); // import validator module
-const db = require("../conf/database"); // import database
+const db = require("../conf/database");
+const isPassportNumber = require("validator/es/lib/isPassportNumber"); // import database
 
 module.exports = {
     usernameCheck: function (req, res, next) {
@@ -15,7 +16,7 @@ module.exports = {
         if(!/[a-zA-Z]/.test(username.charAt(0))) {
             req.flash("error", `Username: must begin with a character`);
         }
-        if(username.contains(" ")) {
+        if(username.includes(" ")) {
             req.flash("error", `Username: must not contain spaces`);
         }
 
@@ -26,7 +27,9 @@ module.exports = {
         }
 
     },
-    passwordCheck: function (req, res, next) {}, //confirm password is on the front end
+    passwordCheck: function (req, res, next) { //confirm password is on the front end
+        is
+    },
     emailCheck: function (req, res, next) {},
     tosCheck: function (req, res, next) {},
     ageCheck: function (req, res, next) {},

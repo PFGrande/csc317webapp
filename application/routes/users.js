@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var { isLoggedIn, isMyProfile } = require("../middleware/auth.js");
-const {usernameCheck, isUsernameUnique} = require("../middleware/validation");
+const {usernameCheck, isUsernameUnique, isEmailUnique} = require("../middleware/validation");
 
 /*
 removed alerts from this file because they are being executed outside of the browser,
@@ -53,7 +53,7 @@ router.use("/registration", function(req, res, next) {
 /*routing for localhost:3000/user/registration */
 //Left off at 36:13, remember to rewatch bcrypt lecture
 //request handler for the registration page, parameters: route path, handler function
-router.post('/registration', usernameCheck, isUsernameUnique, async function(req, res, next) {
+router.post('/registration', usernameCheck, isUsernameUnique, isEmailUnique, async function(req, res, next) {
   //destructure json object.
   let {username, email, password} = req.body;
 
