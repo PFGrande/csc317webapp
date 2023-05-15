@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
+var { isLoggedIn, isMyProfile } = require("../middleware/auth");
 
 /*
 removed alerts from this file because they are being executed outside of the browser,
@@ -186,7 +187,12 @@ router.use(function (req, res, next) {
   }
 });
 
-router.get("/profile/:id(\\d+)", function (req, res) {
+
+//router.use("/profile/:id(\\d+)", isMyProfile);
+//router.use("/profile/:id(\\d+)", isLoggedIn);
+//ensures ID is integer
+router.get("/profile/:id(\\d+)", isMyProfile, function (req, res) {
+  //console.log(req.params); prints id of logged in user
   res.render('profile', {title: 'Profile'});
 });
 

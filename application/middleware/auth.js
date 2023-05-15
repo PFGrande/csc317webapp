@@ -16,5 +16,20 @@ module.exports = {
     },
     isMyProfile: function (req, res, next) { //ensures user can ONLY view their own profile
         // E.C.: private and public profiles
+        var {id} = req.params;
+
+        if (req.session.user.userID == id) { // == operator
+            next(); // next('route') goes directly to route handler, anything else inside of next is considered an error
+        } else {
+            req.flash("error", `this is not your profile`);
+            req.session.save(function (err) {
+                if (err) {
+                    next(err);
+                } else {
+                    res.redirect('/');
+                }
+            })
+        }
+
     }
 };
