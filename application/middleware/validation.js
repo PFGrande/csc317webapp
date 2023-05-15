@@ -1,6 +1,5 @@
 var validator = require('validator'); // import validator module
-const db = require("../conf/database");
-const isPassportNumber = require("validator/es/lib/isPassportNumber"); // import database
+const db = require("../conf/database"); // import database
 
 module.exports = {
     usernameCheck: function (req, res, next) {
@@ -28,7 +27,7 @@ module.exports = {
 
     },
     passwordCheck: function (req, res, next) { //confirm password is on the front end
-        is
+
     },
     emailCheck: function (req, res, next) {},
     tosCheck: function (req, res, next) {},
