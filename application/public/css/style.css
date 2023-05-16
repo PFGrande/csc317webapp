@@ -8,6 +8,22 @@ html.custom-doc {
  Smoke grenade: https://www.youtube.com/watch?v=k2DgKWf4ZN4&ab_channel=Meepception
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
+
+#flash-message {
+  position: absolute;
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  z-index: 100000; /*keeps it at the front */
+
+}
+
+.alert {
+  height: 3.5em !important;
+  width: 25%;
+}
+
 body.custom-body {
   /*padding: 50px;*/
   background-color: #CBE4DE;

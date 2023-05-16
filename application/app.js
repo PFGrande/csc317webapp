@@ -63,6 +63,17 @@ app.use(sessions({
 //flash needs sessions, flash must be placed after sessions
 //on every request, flash message will occur
 app.use(flash());
+// was supposed to make the flash messages fade out.
+// app.use(flash(function (req, res, next){
+//     if (req.flash('error').length > 0) {
+//         setInterval(function () {
+//
+//         })
+//     }
+//     if (req.flash('success').length > 0) {
+//
+//     }
+// }));
 
 //print session | later on: move data from session obj to the template so handlebars can use it:
 app.use(function (req, res, next) {

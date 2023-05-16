@@ -19,7 +19,7 @@ router.get('/postvideo', isLoggedIn, function(req, res) {
   res.render('postvideo', {title: 'Upload', description: 'Here you can upload video files'});
 });
 
-router.get('/viewpost', function (req, res) { //set client ID later on.
+router.get('/viewpost/:id(\\d+)', function (req, res) { //set client ID later on.
   res.render('viewpost', {title: 'View Posts', description: 'Video for your viewing pleasure'});
 });
 
