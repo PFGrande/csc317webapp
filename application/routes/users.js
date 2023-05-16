@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var { isLoggedIn, isMyProfile } = require("../middleware/auth.js");
-const {usernameCheck, isUsernameUnique, isEmailUnique} = require("../middleware/validation");
+const {usernameCheck, isUsernameUnique, isEmailUnique, passwordCheck} = require("../middleware/validation");
 
 /*
 Notes:
@@ -33,7 +33,7 @@ router.use("/registration", function(req, res, next) {
 
 /*routing for localhost:3000/user/registration */
 //request handler for the registration page, parameters: route path, handler function
-router.post('/registration', usernameCheck, isUsernameUnique, isEmailUnique, async function(req, res, next) {
+router.post('/registration', usernameCheck, passwordCheck, isUsernameUnique, isEmailUnique, async function(req, res, next) {
   //destructure json object.
   let {username, email, password} = req.body;
 

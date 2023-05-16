@@ -111,6 +111,21 @@ function validatePassword(password) {
         missingCriteria += "\nmust not include spaces";
     }
 
+    // experimental code, this is not supposed to be here, move later to validation.js
+    // passwordStrength =
+    // if (!validator.isStrongPassword(password, {
+    //     minLength: 8,
+    //     minLowercase: 1, //there was no speficification if the user should have at least one lowercase, I included one anyways
+    //     minUppercase: 1,
+    //     minNumbers: 1,
+    //     minSymbols: 1,
+    //     returnScore: false //score won't be returned, might use to display password strength in front end
+    //
+    // })) {
+    //     req.flash("error", ``)
+    // }
+
+    /*This code displays the reasons for why password is invalid*/
     if (password.length < 8) {
         missingCriteria += "\nmust contain 8 characters"
     }
