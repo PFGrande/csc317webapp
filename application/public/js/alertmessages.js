@@ -8,6 +8,7 @@ setTimeout(function() {
 
 }, 2000); //alert disappears after 5 seconds
 */
+/*
 var alertMessage = document.getElementsByClassName("alert");
 
 if (alertMessage.length !== 0) {
@@ -15,3 +16,4 @@ if (alertMessage.length !== 0) {
 
     });
 }
+*/
