@@ -9,15 +9,15 @@
     <body>
         <main>
             <div id="upload-container">
-                <form id="upload-form"> <!-- Video Submission Form -->
+                <form id="upload-form" action="/posts/create" method="POST" enctype="multipart/form-data"> <!-- Video Submission Form -->
                     <label for="upload-file">Submit Video: </label>
-                    <input type="file" id="upload-file">
+                    <input type="file" id="upload-file" name="uploadVideo" required>
 
                     <label for="upload-title">Video Title: </label>
-                    <input type="text" id="upload-title">
+                    <input type="text" id="upload-title" name="title" required>
 
                     <label for="upload-desc">Video Description: </label>
-                    <input type="text" id="upload-desc">
+                    <input type="text" id="upload-desc" name="description" required>
 
                     <div id="upload-checkbox"> <!-- used to format checkbox in webpage -->
                         <input type="checkbox" id="upload-tos">

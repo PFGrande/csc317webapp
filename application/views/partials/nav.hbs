@@ -15,7 +15,9 @@
         <!-- <li><a href="../html/login.html">Log in</a></li> -->
         <li><a href="/postvideo">Post Video</a></li>
         <li><a href="/users/profile/{{user.userID}}">Profile</a></li> <!-- ID from session object -->
-        <li><a href="/registration">Register</a></li>
+        {{#unless isLoggedIn}}
+            <li><a href="/registration">Register</a></li>
+        {{/unless}}
         <li><a href="/viewpost">View Posts</a></li>
     </ul>
     <!-- log this}} prints context object (in this case it's res.locals.isLoggedIn -->
