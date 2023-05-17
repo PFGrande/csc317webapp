@@ -139,8 +139,33 @@ module.exports = {
         }
         //List of unusable email characters:
     },
-    tosCheck: function (req, res, next) {},
-    ageCheck: function (req, res, next) {},
+    isTosChecked: function (req, res, next) {//reminder that I turned off all the middleware lol
+        var {tosCheck} = req.body;
+
+        if (tosCheck !== 'on') {
+            req.flash("error", `TOS: Must Accepts the Terms of Service`);
+        }
+
+        if (req.session.flash.error) {
+            res.redirect('/registration');
+        } else {
+            next();
+        }
+
+    },
+    isAgeChecked: function (req, res, next) {
+        var {ageCheck} = req.body;
+
+        if (ageCheck !== 'on') {
+            req.flash("error", "Age Confirmation: User must confirm their age");
+        }
+
+        if (req.session.flash.error) {
+            res.redirect('/registration');
+        } else {
+            next();
+        }
+    },
     isUsernameUnique: async function (req, res, next) {
         var {username} = req.body;
         try {

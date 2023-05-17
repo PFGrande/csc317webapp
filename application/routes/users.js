@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var { isLoggedIn, isMyProfile } = require("../middleware/auth.js");
-const {usernameCheck, isUsernameUnique, isEmailUnique, passwordCheck, emailCheck} = require("../middleware/validation");
+const {usernameCheck, isUsernameUnique, isEmailUnique, passwordCheck, emailCheck, isAgeChecked, isTosChecked} = require("../middleware/validation");
 
 /*
 Notes:
@@ -33,7 +33,13 @@ router.use("/registration", function(req, res, next) {
 
 /*routing for localhost:3000/user/registration */
 //request handler for the registration page, parameters: route path, handler function
-router.post('/registration', usernameCheck, passwordCheck, emailCheck, isUsernameUnique, isEmailUnique, async function(req, res, next) {
+
+const registrationMiddleware = [usernameCheck, passwordCheck, emailCheck, isAgeChecked, isTosChecked, isUsernameUnique, isEmailUnique];
+router.post('/registration', registrationMiddleware, async function(req, res, next) {
+  //For debugging request object:
+  //console.log(req.body);
+  //console.log(req.params);
+
   //destructure json object.
   let {username, email, password} = req.body;
 
