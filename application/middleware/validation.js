@@ -66,6 +66,14 @@ module.exports = {
             / * - + ! @ # $ ^ & ~ [ ]`);
         }
 
+        var {confirmPassword} = req.body;
+
+        //ask Professor if it's okay to check confirm password on backend to
+        //display message on the front end
+        if (confirmPassword !== password) {
+            req.flash("error", `Password and Confirm Password must match`);
+        }
+
         if(req.session.flash.error) { // if true = error
             res.redirect('/registration');
         } else {
