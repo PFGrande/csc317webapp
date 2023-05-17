@@ -1,6 +1,7 @@
 var validator = require('validator'); // import validator module
-const db = require("../conf/database"); // import database
-//const specialChars = ['\\/', '\\*', '\\-', '\\+', '\\!', '\\@', '\\#', '\\$', '\\^', '\\&', '\\~', '\\[', '\\]'];
+const db = require("../conf/database");
+const {flatten} = require("express/lib/utils"); // import database
+const specialChars = ['\/', '\*', '\-', '\+', '\!', '\@', '\#', '\$', '\^', '\&', '\~', '\[', '\]'];
 /*note work on confirm password later, and also work on showing the user what they're entering wrong before submitting the form*/
 module.exports = {
     usernameCheck: function (req, res, next) {
@@ -50,34 +51,26 @@ module.exports = {
             req.flash("error", `Password: must contain at least one uppercase letter (A-Z)`);
         }
 
+        //Check for special chars
+        let hasSpecialChar = false;
+
+        for(let i = 0; i < specialChars.length; i++) {
+            if (password.includes(specialChars[i])) {
+                hasSpecialChar = true;
+                break;
+            }
+        }
+
+        if (hasSpecialChar === false) {
+            req.flash("error", `Password: must contain a special character: \n
+            / * - + ! @ # $ ^ & ~ [ ]`);
+        }
+
         if(req.session.flash.error) { // if true = error
             res.redirect('/registration');
         } else {
             next();
         }
-
-        // if(!function () {
-        //     for (let i = 0; i < specialChars.length; i++) {
-        //         if (password.includes(specialChars[i])) {
-        //             return true;
-        //         }
-        //     }
-        // }) {
-        //     req.flash("error", `Password: must contain one special character: / * - + ! @ # $ ^ & ~ [ ]`);
-        // }
-        // let passwordStrength = validator.isStrongPassword(password, {
-        //     minLength: 8,
-        //     minLowercase: 1, //there was no speficification if the user should have at least one lowercase, I included one anyways
-        //     minUppercase: 1,
-        //     minNumbers: 1,
-        //     minSymbols: 1,
-        //     returnScore: true //score won't be returned, might use to display password strength in front end
-        //
-        // });
-        //
-        // if (!passwordStrength.isValid) {
-        //     let reasons = passwordStrength.
-        // }
 
     },
     emailCheck: function (req, res, next) {},
