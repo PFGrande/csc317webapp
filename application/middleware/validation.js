@@ -1,6 +1,6 @@
 var validator = require('validator'); // import validator module
-const db = require("../conf/database");
-const {flatten} = require("express/lib/utils"); // import database
+const db = require("../conf/database"); // import database
+const {flatten} = require("express/lib/utils");
 const specialChars = ['\/', '\*', '\-', '\+', '\!', '\@', '\#', '\$', '\^', '\&', '\~', '\[', '\]'];
 /*note work on confirm password later, and also work on showing the user what they're entering wrong before submitting the form*/
 module.exports = {
@@ -73,7 +73,72 @@ module.exports = {
         }
 
     },
-    emailCheck: function (req, res, next) {},
+    emailCheck: function (req, res, next) {
+        var {email} = req.body;
+
+        if (!email) {
+            req.flash("error", `Please enter an email address`);
+        }
+
+        //redundant because invalid chars are checked for later on, but gives user more info.
+        if (email.includes(" ")) {
+            req.flash("error", `Email: Must not Contain Spaces`)
+        }
+
+        //check if there is al least one . or @ in the email
+        if (email.includes(".") && email.includes("@")) {
+            //checks if user only put domain
+            if (email.lastIndexOf("@") === 0) {
+                req.flash("error", `Invalid Email Address`);
+            }
+
+            if (email.indexOf("@") !== email.lastIndexOf("@")) {
+                req.flash("error", `Email: Invalid Email Name`);
+            }
+
+            let subLevelDomainSeparator = email.indexOf("@");
+            let topLevelDomainSeparator = email.lastIndexOf(".");
+
+            //checks domain name is viable, the last index of "." is because it can be in the name
+            if (subLevelDomainSeparator > topLevelDomainSeparator) {
+                req.flash("error", `Email: Invalid Email Address`);
+            }
+            if (topLevelDomainSeparator - subLevelDomainSeparator === 1) {
+                req.flash("error", `Email: Invalid Subdomain`);
+            }
+
+            // //checks distance between "@" and "." for the domain
+            // if (email.substring(subLevelDomainSeparator, topLevelDomainSeparator).length === 0) {
+            //     req.flash("error" `Email: Invalid Domain`);
+            // }
+
+            //takes the "name/local" part of email address
+            let localEmailName = email.substring(0, email.indexOf("@"));
+
+            if (localEmailName.length > 63) {
+                req.flash("error", `Email: Invalid Email Name Length`);
+            }
+
+            if (!/^[A-Za-z0-9._-]+$/.test(localEmailName)) {
+                req.flash("error", `Email: Invalid Characters`)
+            }
+
+            //checks if the last character in the string is the top level domain separator (".")
+            //This is because there should be at least one character after top level domain separator
+            if (email.length - 1 === topLevelDomainSeparator) {
+                req.flash("error", `Email: Invalid Top Level Domain`);
+            }
+        } else {
+            req.flash("error", `Email: Must Contain a Valid Domain`);
+        }
+
+        if(req.session.flash.error) {
+            res.redirect('/registration');
+        } else {
+            next();
+        }
+        //List of unusable email characters:
+    },
     tosCheck: function (req, res, next) {},
     ageCheck: function (req, res, next) {},
     isUsernameUnique: async function (req, res, next) {
