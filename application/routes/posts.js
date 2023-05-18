@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+const {makeThumbnail} = require("../middleware/posts");
 
 //allows for video to be stored in local storage (hard drive)
 /*
@@ -47,18 +48,11 @@ const upload = multer({ storage: storage })
 
 //upload.single = upload 1 item
 //upload.array("uploadVideo, 20"), you can upload 20 videos at a time
-router.post("/create", upload.single("uploadVideo"), function (req, res, next) {
+router.post("/create", upload.single("uploadVideo"), makeThumbnail, function (req, res, next) {
     console.log(req.file); //video file
     console.log(req.body); //text, ex: title, description
     res.end();
 })
-
-
-
-
-
-
-
 
 
 
