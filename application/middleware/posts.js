@@ -18,5 +18,15 @@ module.exports = {
                 next(error);
             }
         }
+    },
+    getPostsForUserById: function (req, res, next) { //grab posts made by single user, viwable in profile page
+
+    },
+    getPostsById: function (req, res, next) { //gets single post to display on the "viewpost" page
+        res.locals.currentPost = rows[0]; //gets 1 post
+    },
+    getCommentsForPostById: function (req, res, next) { //gets comments under a post
+        res.locals.currentPost.comments = rows; //gets a row of comments
     }
+    //after these middleware, render "viewpost", stopped @ 1:04:16
 };

@@ -79,13 +79,20 @@ router.post("/create", isLoggedIn, upload.single("uploadVideo"), makeThumbnail, 
 
 });
 
-router.get('/viewpost/:id(\\d+)', function (req, res) { //set client ID later on.
+// /viewpost/:id(\d+)
+router.get('/:id(\\d+)', function (req, res) { //set client ID later on.
     res.render('viewpost', {title: 'View Posts', description: 'Video for your viewing pleasure'});
 });
 
+//search for posts
+router.get('/search', function (req, res, next) {
 
+});
 
+//deletes a post
+router.delete("/delete", function (req, res, next) {
 
+});
 
 
 
