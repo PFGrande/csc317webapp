@@ -4,17 +4,20 @@
         <li><a href="/">Home</a></li>
         {{#if isLoggedIn}} <!-- if not logged in, show the log in button -->
             <!-- Lecture note: professor shows how to add username onto UI @ 43:01 -->
-        <li>
-            <form id="logout-form" action="/users/logout" method="post">
-                <button id="logout-button" type="submit">Log Out</button>
-            </form>
-        </li>
+            <li>
+                <form id="logout-form" action="/users/logout" method="post">
+                    <button id="logout-button" type="submit">Log Out</button>
+                </form>
+            </li>
         {{else}}
             <li><a href="/login">Log in</a></li>
         {{/if}}
         <!-- <li><a href="../html/login.html">Log in</a></li> -->
         <li><a href="/postvideo">Post Video</a></li>
-        <li><a href="/users/profile/{{user.userID}}">Profile</a></li> <!-- ID from session object -->
+        {{#if isLoggedIn}} <!-- wanted to keep postvideo in center of navbar -->
+            <li><a href="/users/profile/{{user.userID}}">Profile</a></li> <!-- ID from session object -->
+        {{/if}}
+
         {{#unless isLoggedIn}}
             <li><a href="/registration">Register</a></li>
         {{/unless}}
