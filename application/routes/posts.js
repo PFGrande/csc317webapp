@@ -10,6 +10,7 @@ var multer = require('multer');
 *   /public/images/uploads - stores thumbnails
 *   /public/videos/uploads - stores user uploaded videos
 *   /public/videos - stores video files, not by user
+*   warning: careful because now we are using filesystem, NOT URLs
 *
 *
 Todo:
@@ -27,7 +28,9 @@ Todo:
 //path to wherever you want to move file will also go to cb
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/tmp/my-uploads') //null = there is no error in file upload, multer catches most errors we might encounter
+        //currentWorking directory (application)/public/videos/uploads DO NOT add the leading '/'
+        // the leading slash IS necessary for the front end, will fix in handlebars
+        cb(null, 'public/videos/uploads') //null = there is no error in file upload, multer catches most errors we might encounter
     },
     filename: function (req, file, cb) { // file parameter is the reference to the uploaded file
         var fileExtension = file.mimetype.split("/")[1]; //mimetype denotes file type, this code gets right side after slash
@@ -42,8 +45,11 @@ const upload = multer({ storage: storage })
 
 
 
-router.post("/create", function (req, res, next) {
-    console.log(req);
+//upload.single = upload 1 item
+//upload.array("uploadVideo, 20"), you can upload 20 videos at a time
+router.post("/create", upload.single("uploadVideo"), function (req, res, next) {
+    console.log(req.file); //video file
+    console.log(req.body); //text, ex: title, description
     res.end();
 })
 
