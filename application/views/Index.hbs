@@ -16,7 +16,9 @@
         <p id="posts-count"></p>
 
         <div id="posts-grid">
-
+            {{#each posts}}
+                {{>card this}}
+            {{/each}}
         </div>
 
     </main>

@@ -48,9 +48,26 @@ module.exports = {
     },
     getCommentsForPostById: async function (req, res, next) { //gets comments under a post
         res.locals.currentPost.comments = rows; //gets a row of comments
+
     },
-    getRecentPosts: function (req, res, next) {//shows content on the home page
+    getRecentPosts: async function (req, res, next) {//shows content on the home page
         //SELECT * FROM csc317.posts ORDER BY createdBy DESC LIMIT 8
+        try {
+            var [rows, _] = await db.execute(`SELECT * FROM csc317.posts ORDER BY createdAt DESC LIMIT 8`);
+            res.locals.posts = rows;
+            res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'});
+
+            next();
+                // if (rows && rows.length == 0) {
+                //     //return the most recent posts
+                // } else {
+                //     res.locals.posts = rows;
+                //     return res.render('index')
+                // }
+
+        } catch (error) {
+            next(error);
+        }
     }
     //after these middleware, render "viewpost", stopped @ 1:04:16
 };

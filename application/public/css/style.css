@@ -9,6 +9,31 @@ html.custom-doc {
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
 
+.search-bar {
+  width: 25em !important;
+  display: flex;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.search-form {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.search-text {
+  width: 80%;
+
+}
+
+.search-button {
+  width: 25%;
+  height: 2em;
+}
+
 #flash-message {
   position: absolute;
   flex-direction: column;

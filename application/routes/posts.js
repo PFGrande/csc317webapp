@@ -85,9 +85,28 @@ router.get('/:id(\\d+)', getPostsById, function (req, res) { //set client ID lat
 });
 
 //search for posts
-router.get('/search', function (req, res, next) {
-    console.log(req.query);
-    res.end();
+router.get('/search', async function (req, res, next) {
+    //console.log(req.query);
+    var {searchValue} = req.query;
+    try {
+        var [rows, _] = await db.execute(`select id,title,thumbnail, concat_ws(' ', title, description) as haystack
+        from posts
+        having haystack like ?;`, [`%${searchValue}%`]);
+
+        if (rows && rows.length == 0) {
+            //return the most recent posts
+            [rows, _] = await db.execute(`SELECT * FROM csc317.posts ORDER BY createdAt DESC LIMIT 8`);
+            res.locals.posts = rows;
+            res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'});
+        } else {
+            res.locals.posts = rows;
+            return res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'})
+        }
+
+    } catch (error) {
+        next(error);
+    }
+
 });
 
 //deletes a post
