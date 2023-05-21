@@ -1,5 +1,6 @@
 var pathToFFMPEG = require('ffmpeg-static');
 var exec = require('child_process').exec;
+var db = require('../conf/database');
 
 module.exports = {
     makeThumbnail: function (req, res, next) {
@@ -22,11 +23,34 @@ module.exports = {
     getPostsForUserById: function (req, res, next) { //grab posts made by single user, viwable in profile page
 
     },
-    getPostsById: function (req, res, next) { //gets single post to display on the "viewpost" page
-        res.locals.currentPost = rows[0]; //gets 1 post
+    getPostsById: async function (req, res, next) { //gets single post to display on the "viewpost" page
+        var {id} = req.params;
+        try {
+            let [rows, _] = await db.execute(`SELECT u.username, p.video, p.description, p.id
+                FROM posts p
+                JOIN users u
+                ON p.fk_userid=u.id
+                WHERE p.id=?`, [id]);
+
+            const post = rows[0];
+            if (!post) {
+                req.flash("error", 'Post not found')
+            } else {
+                req.locals.currentPost = post;
+                next();
+            }
+
+        } catch (error) {
+            next(error);
+        }
+        // res.locals.currentPost = rows[0]; //gets 1 post
+        // next();
     },
-    getCommentsForPostById: function (req, res, next) { //gets comments under a post
+    getCommentsForPostById: async function (req, res, next) { //gets comments under a post
         res.locals.currentPost.comments = rows; //gets a row of comments
+    },
+    getRecentPosts: function (req, res, next) {//shows content on the home page
+        //SELECT * FROM csc317.posts ORDER BY createdBy DESC LIMIT 8
     }
     //after these middleware, render "viewpost", stopped @ 1:04:16
 };

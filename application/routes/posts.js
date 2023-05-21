@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-const {makeThumbnail} = require("../middleware/posts");
+const {makeThumbnail, getPostsById} = require("../middleware/posts");
 var db = require('../conf/database')
 const {isLoggedIn} = require("../middleware/auth");
 
@@ -80,13 +80,14 @@ router.post("/create", isLoggedIn, upload.single("uploadVideo"), makeThumbnail, 
 });
 
 // /viewpost/:id(\d+)
-router.get('/:id(\\d+)', function (req, res) { //set client ID later on.
-    res.render('viewpost', {title: 'View Posts', description: 'Video for your viewing pleasure'});
+router.get('/:id(\\d+)', getPostsById, function (req, res) { //set client ID later on.
+    res.render('viewpost', {title: 'View Posts', description: 'Video for your viewing pleasure', javaScript: ['showposts.js']});
 });
 
 //search for posts
 router.get('/search', function (req, res, next) {
-
+    console.log(req.query);
+    res.end();
 });
 
 //deletes a post

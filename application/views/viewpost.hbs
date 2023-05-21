@@ -10,9 +10,9 @@
     <main>
         <!-- View Posts UI -->
         <div id="view-posts-ui">
-            <h4 id="post-title">Placeholder Title</h4>
+            <h4 id="post-title">{{currentPost.title}}</h4>
 
-            <video>video placeholder</video>
+            <video src="/{{currentPost.video}}">video placeholder</video>
 
             <h5 id="post-author">Username placeholder</h5>
             <p id="post-date">0/0/0</p>
@@ -20,8 +20,11 @@
 
             <!-- Comment Section -->
             <div id="comment-section">
-                <p class="commenter">Placeholder commenter name</p>
-                <p class="comment">placeholder comment</p>
+                {{#each currentPost.comments}}
+                    {{>comment this}}
+                {{/each}}
+<!--                <p class="commenter">Placeholder commenter name</p>-->
+<!--                <p class="comment">placeholder comment</p>-->
 
             </div>
             <!-- Comment Section END -->
