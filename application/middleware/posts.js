@@ -1,7 +1,7 @@
 var pathToFFMPEG = require('ffmpeg-static');
 var exec = require('child_process').exec;
 var db = require('../conf/database');
-
+//paused @ 51:45
 module.exports = {
     makeThumbnail: function (req, res, next) {
         if (!req.file) {
