@@ -8,21 +8,21 @@
 
 <body>
     <main>
+        {{log this}}
         <!-- View Posts UI -->
         <div id="view-posts-ui">
             <h4 id="post-title">{{currentPost.title}}</h4>
 
-            <video src="/{{currentPost.video}}">video placeholder</video>
+            <video controls class="video-container">
+                <source src="/{{currentPost.video}}" type="video/mp4">
+            </video>
 
-            <h5 id="post-author">Username placeholder</h5>
-            <p id="post-date">0/0/0</p>
-            <p id="post-desc">Description placeholder</p>
+            <h5 id="post-author">Posted by: {{currentPost.username}}</h5>
+            <p id="post-date">{{currentPost.createdAt}}</p>
+            <p id="post-desc">Description: {{currentPost.description}}</p>
 
             <!-- Comment Section -->
             <div id="comment-section">
-                {{#each currentPost.comments}}
-                    {{>comment this}}
-                {{/each}}
 <!--                <p class="commenter">Placeholder commenter name</p>-->
 <!--                <p class="comment">placeholder comment</p>-->
 

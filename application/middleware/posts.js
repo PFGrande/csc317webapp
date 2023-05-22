@@ -23,31 +23,50 @@ module.exports = {
     getPostsForUserById: function (req, res, next) { //grab posts made by single user, viwable in profile page
 
     },
+    //console.log(req.params)
+    //console.log(rows[0] +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")
+    //not working as intended, is it because comments haven't been implemented yet and it's returning null for the comments array?
     getPostsById: async function (req, res, next) { //gets single post to display on the "viewpost" page
         var {id} = req.params;
         try {
-            let [rows, _] = await db.execute(`SELECT u.username, p.video, p.description, p.id
+            let [rows, _] = await db.execute(
+                `SELECT u.username, p.video, p.title, p.description, p.id, p.createdAt
                 FROM posts p
                 JOIN users u
                 ON p.fk_userid=u.id
-                WHERE p.id=?`, [id]);
+                WHERE p.id=?;`,
+                [id]);
 
             const post = rows[0];
-            if (!post) {
-                req.flash("error", 'Post not found')
+            //console.log(rows +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")
+
+            if (!post) { //redirect if post not found
+                req.flash("error", 'Post not found');
+                res.redirect('/');
             } else {
-                req.locals.currentPost = post;
+                res.locals.currentPost = rows[0];
                 next();
             }
 
         } catch (error) {
             next(error);
         }
-        // res.locals.currentPost = rows[0]; //gets 1 post
-        // next();
     },
     getCommentsForPostById: async function (req, res, next) { //gets comments under a post
-        res.locals.currentPost.comments = rows; //gets a row of comments
+        var {id} = req.params;
+        try {
+            let [rows, _] = await db.execute(
+                `SELECT u.username, c.text, c.createdAt
+                FROM comments c
+                JOIN users u
+                ON c.fk_authorId=u.id
+                WHERE c.fk_postId=?;`,
+                [id]);
+            res.locals.currentPost.comments = rows;
+            next();
+        } catch (error) {
+            next(error);
+        }
 
     },
     getRecentPosts: async function (req, res, next) {//shows content on the home page

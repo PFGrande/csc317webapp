@@ -9,6 +9,11 @@ html.custom-doc {
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
 
+.video-container{
+  width: 50%;
+  height: auto;
+}
+
 .search-bar {
   width: 25em !important;
   display: flex;
