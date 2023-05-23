@@ -29,6 +29,9 @@ app.engine(
         nonEmptyObject: function(obj) {
             //return: objectExists && passed in value is an object && object's set of keys > 0
             return obj && obj.constructor === Object && Object.keys(obj).length > 0;
+        },
+        formatDateString: function (dateString) {
+            return new Date(dateString).toLocaleString("en-us", {dateStyle: "long", timeStyle: "medium"})
         }
     }, //adding new helpers to handlebars for extra functionality
   })

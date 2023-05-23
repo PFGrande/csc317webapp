@@ -8,7 +8,6 @@
 
 <body>
     <main>
-        {{log this}}
         <!-- View Posts UI -->
         <div id="view-posts-ui">
             <h4 id="post-title">{{currentPost.title}}</h4>
@@ -18,11 +17,18 @@
             </video>
 
             <h5 id="post-author">Posted by: {{currentPost.username}}</h5>
-            <p id="post-date">{{currentPost.createdAt}}</p>
+            <p id="post-date">{{formatDateString currentPost.createdAt}}</p>
             <p id="post-desc">Description: {{currentPost.description}}</p>
 
             <!-- Comment Section -->
             <div id="comment-section">
+                <div id="comment-box">
+                    <textarea></textarea>
+                </div>
+                {{#each currentPost.comments}}
+
+
+                {{/each}}
 <!--                <p class="commenter">Placeholder commenter name</p>-->
 <!--                <p class="comment">placeholder comment</p>-->
 
