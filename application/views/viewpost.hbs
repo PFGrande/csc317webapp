@@ -10,20 +10,29 @@
     <main>
         <!-- View Posts UI -->
         <div id="view-posts-ui">
-            <h4 id="post-title">{{currentPost.title}}</h4>
+            <div id="video-section">
+                <h4 id="post-title">{{currentPost.title}}</h4>
 
-            <video controls class="video-container">
-                <source src="/{{currentPost.video}}" type="video/mp4">
-            </video>
+                <video controls class="video-container">
+                    <source src="/{{currentPost.video}}" type="video/mp4">
+                </video>
 
-            <h5 id="post-author">Posted by: {{currentPost.username}}</h5>
-            <p id="post-date">{{formatDateString currentPost.createdAt}}</p>
-            <p id="post-desc">Description: {{currentPost.description}}</p>
+                <h5 id="post-author">Posted by: {{currentPost.username}}</h5>
+                <p id="post-date">Uploaded on: {{formatDateString currentPost.createdAt}}</p>
+                <p id="post-desc">Description: {{currentPost.description}}</p>
+            </div>
 
             <!-- Comment Section -->
             <div id="comment-section">
                 <div id="comment-box">
-                    <textarea></textarea>
+                    <textarea id="post-comment"></textarea>
+                    <button> </button> <!-- for the comments-->
+                </div>
+
+                <div class ="comment">
+                    <p class="comment-author">username</p>
+                    <p class ="comment-date">comment date / / / </p>
+                    <p class="comment-content">comment text</p>
                 </div>
                 {{#each currentPost.comments}}
 

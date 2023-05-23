@@ -9,8 +9,52 @@ html.custom-doc {
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
 
-.video-container{
+.comment { /*individual comments*/
+  align-self: center;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.0em;
+  background-color: #2C3333;
+}
+
+#comment-box { /*for comment input*/
+  padding-top: 3em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#comment-section {
+  margin-left: 10%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  background-color: #2E4F4F;
+  color: #CBE4DE;
+}
+
+#video-section { /*video side of page*/
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2em;
+}
+
+#view-posts-ui {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#post-comment {
+  resize: none;
+  width: 80%;
+}
+
+.video-container{
+  align-self: center;
+  width: 95%;
   height: auto;
 }
 
