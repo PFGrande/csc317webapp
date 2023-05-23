@@ -34,6 +34,10 @@ html.custom-doc {
   color: #CBE4DE;
 }
 
+#comment-button {
+  width: 20%;
+}
+
 #video-section { /*video side of page*/
   width: 50%;
   display: flex;
@@ -47,7 +51,7 @@ html.custom-doc {
   width: 100%;
 }
 
-#post-comment {
+#comment-text {
   resize: none;
   width: 80%;
 }
