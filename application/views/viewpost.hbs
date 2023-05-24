@@ -26,7 +26,7 @@
             <div id="comment-section">
                 <div id="comment-box">
                     <textarea id="comment-text"></textarea> <!-- Former id: post-comment-->
-                    <input type="button" id="comment-button" data-postid="{{currentPost.id}}"> </input> <!-- for the comments-->
+                    <input type="button" id="comment-button" data-postid="{{currentPost.id}}" value="add comment"> </input> <!-- for the comments-->
                 </div>
 
 <!--                <div class ="comment">-->
@@ -79,8 +79,7 @@
                                 </div>`;
                             commentSection.append(commentFragment.content);
                         });
-
-            })
+            });
 
         </script>
     </main>

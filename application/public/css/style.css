@@ -36,7 +36,7 @@ html.custom-doc {
 }
 
 #comment-button {
-  width: 20%;
+  width: 25%;
 }
 
 #video-section { /*video side of page*/
@@ -54,7 +54,7 @@ html.custom-doc {
 
 #comment-text {
   resize: none;
-  width: 80%;
+  width: 75%;
 }
 
 .video-container{
