@@ -95,7 +95,7 @@ async function makeCommentsTable(connection) {
     // Comments Table SQL Goes here
     `CREATE TABLE IF NOT EXISTS ${process.env.DB_NAME}.comments (
        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-       createdAt DATETIME NOT NULL,
+       createdAt DATETIME NOT NULL DEFAULT current_timestamp,
        text TEXT NOT NULL,
        fk_authorId INT UNSIGNED NOT NULL,
        updatedAt DATETIME NOT NULL DEFAULT current_timestamp,

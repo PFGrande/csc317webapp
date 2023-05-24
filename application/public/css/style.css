@@ -10,6 +10,7 @@ html.custom-doc {
 */
 
 .comment { /*individual comments*/
+  margin-top: 1em;
   align-self: center;
   width: 80%;
   display: flex;
