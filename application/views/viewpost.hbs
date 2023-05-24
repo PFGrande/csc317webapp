@@ -36,7 +36,6 @@
 <!--                </div>-->
                 {{#each currentPost.comments}}
                     {{>comment this}}
-
                 {{/each}}
 <!--                <p class="commenter">Placeholder commenter name</p>-->
 <!--                <p class="comment">placeholder comment</p>-->
@@ -47,11 +46,13 @@
         </div>
         <!-- View Posts UI END-->
         <script>
+            //comment submission
             document.getElementById('comment-button').addEventListener('click', function (ev) {
                 let commentText = document.getElementById("comment-text").value;
 
                 if (!commentText) return
                 //console.log(ev.currentTarget.dataset.postid);
+
                 var postId = ev.currentTarget.dataset.postid;
 
                 fetch("/comments/create", {
@@ -63,7 +64,22 @@
                         postId: postId,
                         comment: commentText
                     })
-                }).then(response => response.json()).then(data => {console.log(data);})
+                }).then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            let commentSection = document.getElementById('comment-section');
+                            let commentFragment = document.createElement('template');
+                            console.log(data.username)
+                            //makes comments appear after submitting
+                            commentFragment.innerHTML =
+                                `<div class ="comment">
+                                    <p class="comment-author">User: ${data.username}</p>
+                                    <p class ="comment-date">Posted on: ${(new Date()).toLocaleString("en-us", {dateStyle: "long", timeStyle:"medium"})}</p>
+                                    <p class="comment-content">${data.comment}</p>
+                                </div>`;
+                            commentSection.append(commentFragment.content);
+                        });
+
             })
 
         </script>

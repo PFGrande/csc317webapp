@@ -15,14 +15,15 @@ router.post('/create', isLoggedIn, async function (req, res, next) { //creating 
             `INSERT INTO comments (text, fk_postId, fk_authorId) VALUE (?,?,?)`, [comment, postId, userID]
         );
 
-        if (insertResult && insertResult == 1) {
+        if (insertResult && insertResult.affectedRows == 1) {
             return res.status(201).json({
                 CommentId: insertResult.insertId,
-                username,
-                comment,
+                username: username,
+                comment: comment,
             });
-        } else {
-
+        } else {//server sided comment submission failure
+            res.json({message: "error"})
+            //req.flash("error", `Comment: Submission Failed`);
         }
 
     } catch (error) {
