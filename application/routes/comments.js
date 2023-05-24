@@ -8,8 +8,6 @@ router.post('/create', isLoggedIn, async function (req, res, next) { //creating 
     var {userID, username} = req.session.user;
     var {postId, comment} = req.body;
 
-    console.log(userID, postId, username, comment + "sdfjnsdfjlnafjlknsajnfnsafnjsdfanjksdfnjsfnjlasnljsfndjajnksfanjkldsfnjsdafnjsfakl");
-
     try {
         var [insertResult, _] = await db.execute(
             `INSERT INTO comments (text, fk_postId, fk_authorId) VALUE (?,?,?)`, [comment, postId, userID]

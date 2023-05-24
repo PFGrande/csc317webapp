@@ -88,6 +88,7 @@ router.get('/:id(\\d+)', getPostsById, getCommentsForPostById, function (req, re
 router.get('/search', async function (req, res, next) {
     //console.log(req.query);
     var {searchValue} = req.query;
+    //console.log("searching for:" + searchValue)
     try {
         var [rows, _] = await db.execute(`select id,title,thumbnail, concat_ws(' ', title, description) as haystack
         from posts
