@@ -100,6 +100,7 @@ router.get('/search', async function (req, res, next) {
             res.locals.posts = rows;
             res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'});
         } else {
+            //console.log(rows[0].id)
             res.locals.posts = rows;
             return res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'})
         }

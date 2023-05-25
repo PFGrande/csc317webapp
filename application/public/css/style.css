@@ -9,6 +9,10 @@ html.custom-doc {
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
 
+.card-link {
+  color: white;
+}
+
 .comment { /*individual comments*/
   margin-top: 1em;
   align-self: center;
