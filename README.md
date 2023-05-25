@@ -19,9 +19,14 @@ Please follow the instructions below and fill in the information requested when 
 # Build/Run Instructions
 
 ## Build Instructions
-1. steps here
-2. steps here
+1. Access the application folder
+2. npm install 
+3. create .env file with the following environment variables:
+   DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, PORT
+4. npm run builddb
+
 
 ## Run Instructions
-1. steps here
-2. steps here 
+1. access application folder
+2. npm start
+3. visit localhost:3000 on browser
