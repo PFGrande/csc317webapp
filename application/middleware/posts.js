@@ -52,6 +52,27 @@ module.exports = {
             next(error);
         }
     },
+    getProfilePostsById: async function (req, res, next) { //gets multiple post to display on the "profile" page
+        var {id} = req.params;
+        try {
+            let [rows, _] = await db.execute(
+                `SELECT * FROM posts WHERE fk_userid = ?;`, [id]);
+
+            const posts = rows;
+            //console.log(rows +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")
+
+            if (!posts) { //redirect if post not found
+                req.flash("error", 'Post not found');
+                res.redirect('/');
+            } else {
+                res.locals.currentPosts = rows;
+                next();
+            }
+
+        } catch (error) {
+            next(error);
+        }
+    },
     getCommentsForPostById: async function (req, res, next) { //gets comments under a post
         var {id} = req.params;
         try {

@@ -4,6 +4,7 @@ var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var { isLoggedIn, isMyProfile } = require("../middleware/auth.js");
 const {usernameCheck, isUsernameUnique, isEmailUnique, passwordCheck, emailCheck, isAgeChecked, isTosChecked} = require("../middleware/validation");
+const {getPostsById, getProfilePostsById} = require("../middleware/posts"); // getAllPostsById,
 
 /*
 Notes:
@@ -118,7 +119,7 @@ router.post('/login', async function(req, res, next) {
 });
 
 //ensures ID is integer
-router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, function (req, res) {
+router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, getProfilePostsById, function (req, res) {
   console.log(req.params); //prints id of logged in user
   res.render('profile', {title: 'Profile'});
   //SELECT * FROM posts
