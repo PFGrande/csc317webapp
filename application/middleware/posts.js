@@ -20,12 +20,10 @@ module.exports = {
             }
         }
     },
+    //Unused. Used getProfilePostsById instead
     getPostsForUserById: function (req, res, next) { //grab posts made by single user, viwable in profile page
 
     },
-    //console.log(req.params)
-    //console.log(rows[0] +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")
-    //not working as intended, is it because comments haven't been implemented yet and it's returning null for the comments array?
     getPostsById: async function (req, res, next) { //gets single post to display on the "viewpost" page
         var {id} = req.params;
         try {
@@ -38,7 +36,6 @@ module.exports = {
                 [id]);
 
             const post = rows[0];
-            //console.log(rows +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")
 
             if (!post) { //redirect if post not found
                 req.flash("error", 'Post not found');
@@ -62,7 +59,6 @@ module.exports = {
                 `SELECT * FROM posts WHERE fk_userid = ? ORDER BY createdAt DESC;`, [id]);
 
             const posts = rows;
-            //console.log(rows +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")
 
             if (!posts) { //redirect if post not found
                 req.flash("error", 'Post not found');
@@ -94,34 +90,15 @@ module.exports = {
 
     },
     getRecentPosts: async function (req, res, next) {//shows content on the home page
-        //SELECT * FROM csc317.posts ORDER BY createdBy DESC LIMIT 8
         try {
             var [rows, _] = await db.execute(`SELECT * FROM csc317.posts ORDER BY createdAt DESC LIMIT 8`);
             res.locals.posts = rows;
             res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'});
 
             next();
-                // if (rows && rows.length == 0) {
-                //     //return the most recent posts
-                // } else {
-                //     res.locals.posts = rows;
-                //     return res.render('index')
-                // }
 
         } catch (error) {
             next(error);
         }
     }
-    // postTosCheck: function (req, res, next) {
-    //
-    //     if (req.checkbox !== 'on') {
-    //         req.flash("error", "User must accept terms of service");
-    //     }
-    //
-    //     if (req.session.flash.error) {
-    //         res.redirect('/users/logout');
-    //     } else {
-    //         next();
-    //     }
-    // }
 };

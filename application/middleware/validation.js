@@ -2,35 +2,42 @@ var validator = require('validator'); // import validator module
 const db = require("../conf/database"); // import database
 const {flatten} = require("express/lib/utils");
 const specialChars = ['\/', '\*', '\-', '\+', '\!', '\@', '\#', '\$', '\^', '\&', '\~', '\[', '\]'];
-/*note work on confirm password later, and also work on showing the user what they're entering wrong before submitting the form*/
-module.exports = {
-    usernameCheck: function (req, res, next) {
-        var {username} = req.body; //destructure body
-        // look for the error cases to inform the user of them
-        username = username.trim();// removes empty space on both sides
-        //username = username.replace(/\s/g, ""); ask prof. how ethical it is to remove chars from username
-        //doubt it is, added it as error instead
 
-        if(!validator.isLength(username, {min:3})) {
+module.exports = {
+    usernameCheck: function (req, res, next) {// look for the error cases to inform the user of them
+        var {username} = req.body; //destructure body
+        username = username.trim();// removes empty space on both sides
+
+        if (!username) {
+            req.flash('error', "Username: please enter a username")
+        }
+
+        //Checks username requirements: flash error if a requirement is not met
+        if(!validator.isLength(username, {min:3})) { // <= 3 chars
             req.flash("error", `Username: must be 3 or more characters`);
         }
-        if(!/[a-zA-Z]/.test(username.charAt(0))) {
+        if(!/[a-zA-Z]/.test(username.charAt(0))) { // checks for first char
             req.flash("error", `Username: must begin with a character`);
         }
-        if(username.includes(" ")) {
+        if(username.includes(" ")) { // checks for spaces
             req.flash("error", `Username: must not contain spaces`);
         }
 
-        if(req.session.flash.error) { // if true = error
+        if(req.session.flash.error) { // checks for invalid username
             res.redirect('/registration');
         } else {
             next();
         }
 
     },
-    passwordCheck: function (req, res, next) { //confirm password is on the front end
+    passwordCheck: function (req, res, next) { //checks password validity
         var {password} = req.body;
 
+        if (!password) {
+            req.flash("error", 'Password: enter a password')
+        }
+
+        //Password requirements: flash error if a requirement is not met
         if(!validator.isLength(password, {min:8})) {
             req.flash("error", `Password: must be 8 or more characters`);
         }
@@ -38,10 +45,6 @@ module.exports = {
         if(password.includes(" ")) {
             req.flash("error", `Password: must not contain spaces`);
         }
-
-        // if(!/[a-z]/.test(password)) {
-        //     req.flash("error", `Password: must be alphanumeric (a-z)`);
-        // } no requirement for there to be at least one lowercase letter
 
         if(!/\d/.test(password)) {
             req.flash("error", `Password: must contain a number (0-9)`)
@@ -68,20 +71,19 @@ module.exports = {
 
         var {confirmPassword} = req.body;
 
-        //ask Professor if it's okay to check confirm password on backend to
         //display message on the front end
         if (confirmPassword !== password) {
             req.flash("error", `Password and Confirm Password must match`);
         }
 
-        if(req.session.flash.error) { // if true = error
+        if(req.session.flash.error) { // check for password validity
             res.redirect('/registration');
         } else {
             next();
         }
 
     },
-    emailCheck: function (req, res, next) {
+    emailCheck: function (req, res, next) { //checks for valid email
         var {email} = req.body;
 
         if (!email) {
@@ -115,11 +117,6 @@ module.exports = {
                 req.flash("error", `Email: Invalid Subdomain`);
             }
 
-            // //checks distance between "@" and "." for the domain
-            // if (email.substring(subLevelDomainSeparator, topLevelDomainSeparator).length === 0) {
-            //     req.flash("error" `Email: Invalid Domain`);
-            // }
-
             //takes the "name/local" part of email address
             let localEmailName = email.substring(0, email.indexOf("@"));
 
@@ -147,7 +144,7 @@ module.exports = {
         }
         //List of unusable email characters:
     },
-    isTosChecked: function (req, res, next) {//reminder that I turned off all the middleware lol
+    isTosChecked: function (req, res, next) {// checks for TOS validity
         var {tosCheck} = req.body;
 
         if (tosCheck !== 'on') {
@@ -174,7 +171,7 @@ module.exports = {
             next();
         }
     },
-    isUsernameUnique: async function (req, res, next) {
+    isUsernameUnique: async function (req, res, next) { //checks if submitted username exists in db
         var {username} = req.body;
         try {
             var [rows, fields] = await db.execute(`select id from users where username=?;`,[username]); //don't use ${username}, could lead to SQL injection
@@ -195,7 +192,7 @@ module.exports = {
             next(error);
         }
     },
-    isEmailUnique: async function (req, res, next) {
+    isEmailUnique: async function (req, res, next) { // checks if email is already in the database
         var {email} = req.body;
         try {
             var [rows, fields] = await db.execute(`select id from users where email=?;`,[email]);

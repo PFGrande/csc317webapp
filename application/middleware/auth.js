@@ -14,7 +14,6 @@ module.exports = {
         }
     },
     isMyProfile: function (req, res, next) { //ensures user can ONLY view their own profile
-        // E.C.: private and public profiles
         var {id} = req.params;
 
         if (req.session.user.userID == id) { // Unnecessary because of "isLoggedIn" middleware: "req.session.user &&"
