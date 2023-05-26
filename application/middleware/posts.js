@@ -112,5 +112,16 @@ module.exports = {
             next(error);
         }
     }
-    //after these middleware, render "viewpost", stopped @ 1:04:16
+    // postTosCheck: function (req, res, next) {
+    //
+    //     if (req.checkbox !== 'on') {
+    //         req.flash("error", "User must accept terms of service");
+    //     }
+    //
+    //     if (req.session.flash.error) {
+    //         res.redirect('/users/logout');
+    //     } else {
+    //         next();
+    //     }
+    // }
 };

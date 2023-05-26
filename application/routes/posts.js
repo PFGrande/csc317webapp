@@ -2,9 +2,10 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-const {makeThumbnail, getPostsById, getCommentsForPostById} = require("../middleware/posts");
+const {makeThumbnail, getPostsById, getCommentsForPostById, postTosCheck, getRecentPosts} = require("../middleware/posts");
 var db = require('../conf/database')
-const {isLoggedIn} = require("../middleware/auth");
+const {isLoggedIn, isMyProfile} = require("../middleware/auth");
+const {isTosChecked} = require("../middleware/validation");
 
 //allows for video to be stored in local storage (hard drive)
 /*
@@ -54,6 +55,7 @@ router.post("/create", isLoggedIn, upload.single("uploadVideo"), makeThumbnail, 
     // console.log(req.file); //video file
     // console.log(req.body); //text, ex: title, description
     // res.end();
+    //console.log(req.body)
     var {title, description} = req.body;
     var {path, thumbnail} = req.file;
     var {userID} = req.session.user;
@@ -96,7 +98,7 @@ router.get('/search', async function (req, res, next) {
 
         if (rows && rows.length == 0) {
             //return the most recent posts
-            [rows, _] = await db.execute(`SELECT * FROM csc317.posts ORDER BY createdAt DESC LIMIT 8`);
+            var [rows, _] = await db.execute(`SELECT * FROM csc317.posts ORDER BY createdAt DESC LIMIT 8`);
             res.locals.posts = rows;
             res.render('index', { title: 'CSC 317 App / Home', name:"Pedro", description: 'Welcome to the home of Americas best lineups!'});
         } else {
@@ -112,7 +114,26 @@ router.get('/search', async function (req, res, next) {
 });
 
 //deletes a post
-router.delete("/delete", function (req, res, next) {
+router.post("/delete/:id(\\d+)", async function (req, res, next) {
+    let {userID} = req.session.user;
+    let {id} = req.params;
+    //console.log(id + "  STUFF    " + userID);
+
+    //checks if the user is trying to delete their own post or another person's
+    var [rows, _] = await db.execute(`SELECT * FROM posts WHERE id=? AND fk_userid=?`, [id, userID]);
+
+    if (rows && rows == 0) {
+        req.flash('Error', "unable to delete post")
+        res.redirect('/');
+    } else {
+
+        //deletes comments assigned to a post before deleting the post
+        var [commentsRows, commentsFields] = await db.execute(`DELETE FROM comments WHERE fk_postId=?`, [id]);
+        var [postsRows, postsFields] = await db.execute(`DELETE FROM posts WHERE id=?`, [id]);
+
+        return res.redirect('/');
+    }
+
 
 });
 

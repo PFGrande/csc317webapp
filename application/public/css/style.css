@@ -18,10 +18,11 @@ html.custom-doc {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-color: white;
+  /*background-color: white;*/
 }
 
 .profile-post-controls {
+  color: #CBE4DE;
   display: flex;
   flex-direction: column;
   width: 50%;

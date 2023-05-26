@@ -3,10 +3,10 @@
         <source src="/{{this.video}}" type="video/mp4">
     </video>
     <div class="profile-post-controls">
-        <h4>{{this.title}}</h4>
+        <h4><a href="/posts/{{this.id}}">{{this.title}}</a></h4>
         <p>{{this.createdAt}}</p>
-        <form class="delete-post">
-            <button type="submit" class="delete-post-button">Delete Video</button>
+        <form class="delete-post" method="post" action="/posts/delete/{{this.id}}">
+            <button type="submit" class="delete-post-button" value="DELETE">Delete Video</button>
         </form>
     </div>
 </li>
