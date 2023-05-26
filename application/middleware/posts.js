@@ -55,8 +55,11 @@ module.exports = {
     getProfilePostsById: async function (req, res, next) { //gets multiple post to display on the "profile" page
         var {id} = req.params;
         try {
+            //I could also use id instead of createdAt to dictate the order, but createdAt makes code more readable :)
+
+            // gets posts by user from most recent to oldest
             let [rows, _] = await db.execute(
-                `SELECT * FROM posts WHERE fk_userid = ?;`, [id]);
+                `SELECT * FROM posts WHERE fk_userid = ? ORDER BY createdAt DESC;`, [id]);
 
             const posts = rows;
             //console.log(rows +"skgngjansgjendsjgds jgb sbk sdhnsbdf ergn ewrkg ndsklgn dsnj njkdsnjkdgfn jkdfgsnjdfgnjldnsfljnjdfsgnjlkds\n\n\n\n\n\n\n\n")

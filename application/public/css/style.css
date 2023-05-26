@@ -9,6 +9,28 @@ html.custom-doc {
     image: https://liquipedia.net/counterstrike/Smoke_Grenade
 */
 
+.delete-post-button {
+  background-color: tomato;
+  color: #2C3333;
+}
+
+.profile-post {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: white;
+}
+
+.profile-post-controls {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.delete-post {
+  width: 100%;
+}
+
 .card-link {
   color: white;
 }
@@ -383,7 +405,7 @@ form > label {
 }
 
 .profile-video {
-  width: auto;
+  width: 35%;
   height: 29%;
   padding-bottom: 1em;
 }

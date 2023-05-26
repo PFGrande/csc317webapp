@@ -12,15 +12,9 @@
         <div id="view-profile">
             <div id="profile-videos">
                 <ul class="display-user-videos"> <!-- list of videos ordered by date -->
-                    <li>
-                        <!--<video class="user-video" src="https://youtu.be/oIwS357ljMA"></video> viewing own video may have different UI-->
-                        <iframe class="profile-video" width="560" height="315" src="https://www.youtube.com/embed/oIwS357ljMA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </li>
-                    <li>
-                        <iframe class="profile-video" width="560" height="315" src="https://www.youtube.com/embed/oIwS357ljMA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </li>
-
-
+                    {{#each currentPosts}}
+                        {{> userpost this}}
+                    {{/each}}
                 </ul> <!-- list of videos END -->
             </div>
 
