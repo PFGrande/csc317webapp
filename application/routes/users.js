@@ -27,20 +27,15 @@ router.get('/', async function(req, res, next) {
 });
 
 /*server side validation */
-/*
-router.use("/registration", function(req, res, next) {
-  //it is optional to validate data here, assume data is already clean due to using validation.js
-});*/
 
-/*routing for localhost:3000/user/registration */
-//request handler for the registration page, parameters: route path, handler function
+
+
+
 
 const registrationMiddleware = [usernameCheck, passwordCheck, emailCheck, isAgeChecked, isTosChecked, isUsernameUnique, isEmailUnique];
-router.post('/registration', registrationMiddleware, async function(req, res, next) {
-  //For debugging request object:
-  //console.log(req.body);
-  //console.log(req.params);
 
+//request handler for the registration page, parameters: route path, handler function
+router.post('/registration', registrationMiddleware, async function(req, res, next) {
   //destructure json object.
   let {username, email, password} = req.body;
 
@@ -72,8 +67,8 @@ router.post('/registration', registrationMiddleware, async function(req, res, ne
 //LOG IN:
 //Define route and use route handler function for login:
 router.post('/login', async function(req, res, next) {
-  //execute data check on the database: (should I assume the data being submitted has been sanitized?)
-  let {username, password} = req.body; //I believe login request only contains these two values in the request body
+  //execute data check on the database
+  let {username, password} = req.body;
 
   if (!username || !password) { //make sure username and password fields aren't empty
     return res.redirect('/login');
@@ -118,12 +113,10 @@ router.post('/login', async function(req, res, next) {
 
 });
 
-//ensures ID is integer
+//id(\\d+)ensures ID is integer
 router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, getProfilePostsById, function (req, res) {
-  console.log(req.params); //prints id of logged in user
   res.render('profile', {title: 'Profile'});
-  //SELECT * FROM posts
-  // WHERE fk_userid = 1;
+
 });
 
 //destroy current user's session
