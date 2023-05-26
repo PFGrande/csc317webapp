@@ -1,9 +1,7 @@
 <nav id="navigation-bar">
-    <!--<Label for="navigation-bar">Pages:</Label> -->
     <ul id="nav-options">
         <li><a href="/">Home</a></li>
         {{#if isLoggedIn}} <!-- if not logged in, show the log in button -->
-            <!-- Lecture note: professor shows how to add username onto UI @ 43:01 -->
             <li>
                 <form id="logout-form" action="/users/logout" method="post">
                     <button id="logout-button" type="submit">Log Out</button>
@@ -21,16 +19,13 @@
         </li>
 
         <li><a href="/postvideo">Post Video</a></li>
-        {{#if isLoggedIn}} <!-- wanted to keep postvideo in center of navbar -->
+        {{#if isLoggedIn}}
             <li><a href="/users/profile/{{user.userID}}">Profile</a></li> <!-- ID from session object -->
         {{/if}}
 
         {{#unless isLoggedIn}}
             <li><a href="/registration">Register</a></li>
         {{/unless}}
-<!--        <li><a href="/viewpost">View Posts</a></li> &lt;!&ndash; Might replace with a search bar and place it in the middle &ndash;&gt;-->
+
     </ul>
-    <!-- log this}} prints context object (in this case it's res.locals.isLoggedIn -->
-
-
 </nav>

@@ -1,91 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ViewPost | WebApp</title>
-<!--    <link rel="stylesheet" href="../css/style.css">-->
-</head>
+    <body>
 
-<body>
-    <main>
-        <!-- View Posts UI -->
-        <div id="view-posts-ui">
-            <div id="video-section">
-                <h4 id="post-title">{{currentPost.title}}</h4>
+        <main>
+            <!-- View Posts UI -->
+            <div id="view-posts-ui">
+                <div id="video-section">
+                    <h4 id="post-title">{{currentPost.title}}</h4>
 
-                <video controls class="video-container">
-                    <source src="/{{currentPost.video}}" type="video/mp4">
-                </video>
+                    <video controls class="video-container">
+                        <source src="/{{currentPost.video}}" type="video/mp4">
+                    </video>
 
-                <h5 id="post-author">Posted by: {{currentPost.username}}</h5>
-                <p id="post-date">Uploaded on: {{formatDateString currentPost.createdAt}}</p>
-                <p id="post-desc">Description: {{currentPost.description}}</p>
-            </div>
-
-            <!-- Comment Section -->
-            <div id="comment-section">
-                <div id="comment-box">
-                    <textarea id="comment-text"></textarea> <!-- Former id: post-comment-->
-                    <input type="button" id="comment-button" data-postid="{{currentPost.id}}" value="add comment"> </input> <!-- for the comments-->
+                    <h5 id="post-author">Posted by: {{currentPost.username}}</h5>
+                    <p id="post-date">Uploaded on: {{formatDateString currentPost.createdAt}}</p>
+                    <p id="post-desc">Description: {{currentPost.description}}</p>
                 </div>
 
-<!--                <div class ="comment">-->
-<!--                    <p class="comment-author">username</p>-->
-<!--                    <p class ="comment-date">comment date / / / </p>-->
-<!--                    <p class="comment-content">comment text</p>-->
-<!--                </div>-->
-                {{#each currentPost.comments}}
-                    {{>comment this}}
-                {{/each}}
-<!--                <p class="commenter">Placeholder commenter name</p>-->
-<!--                <p class="comment">placeholder comment</p>-->
+                <!-- Comment Section -->
+                <div id="comment-section">
+                    <div id="comment-box">
+                        <textarea id="comment-text"></textarea>
+                        <input type="button" id="comment-button" data-postid="{{currentPost.id}}" value="add comment"> </input> <!-- for the comments-->
+                    </div>
+
+                    {{#each currentPost.comments}}
+                        {{>comment this}}
+                    {{/each}}
+
+                </div>
+                <!-- Comment Section END -->
 
             </div>
-            <!-- Comment Section END -->
+            <!-- View Posts UI END-->
+            <script>
+                // Comment submission
+                document.getElementById('comment-button').addEventListener('click', function (ev) {
+                    let commentText = document.getElementById("comment-text").value;
 
-        </div>
-        <!-- View Posts UI END-->
-        <script>
-            //comment submission
-            document.getElementById('comment-button').addEventListener('click', function (ev) {
-                let commentText = document.getElementById("comment-text").value;
+                    if (!commentText) return
 
-                if (!commentText) return
-                //console.log(ev.currentTarget.dataset.postid);
+                    var postId = ev.currentTarget.dataset.postid;
 
-                var postId = ev.currentTarget.dataset.postid;
+                    fetch("/comments/create", {
+                        method: "POST",
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body: JSON.stringify({
+                            postId: postId,
+                            comment: commentText
+                        })
+                    }).then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                let commentSection = document.getElementById('comment-section');
+                                let commentFragment = document.createElement('template');
+                                console.log(data.username)
+                                //renders comment after it is submitted
+                                commentFragment.innerHTML =
+                                    `<div class ="comment">
+                                        <p class="comment-author">User: ${data.username}</p>
+                                        <p class ="comment-date">Posted on: ${(new Date()).toLocaleString("en-us", {dateStyle: "long", timeStyle:"medium"})}</p>
+                                        <p class="comment-content">${data.comment}</p>
+                                    </div>`;
+                                commentSection.append(commentFragment.content);
+                            });
+                });
 
-                fetch("/comments/create", {
-                    method: "POST",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body: JSON.stringify({
-                        postId: postId,
-                        comment: commentText
-                    })
-                }).then(response => response.json())
-                        .then(data => {
-                            console.log(data);
-                            let commentSection = document.getElementById('comment-section');
-                            let commentFragment = document.createElement('template');
-                            console.log(data.username)
-                            //makes comments appear after submitting
-                            commentFragment.innerHTML =
-                                `<div class ="comment">
-                                    <p class="comment-author">User: ${data.username}</p>
-                                    <p class ="comment-date">Posted on: ${(new Date()).toLocaleString("en-us", {dateStyle: "long", timeStyle:"medium"})}</p>
-                                    <p class="comment-content">${data.comment}</p>
-                                </div>`;
-                            commentSection.append(commentFragment.content);
-                        });
-            });
+            </script>
+        </main>
 
-        </script>
-    </main>
-
-<!--    <div id="top-footer-image">-->
-<!--        <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">-->
-<!--    </div>-->
-</body>
+    </body>
 </html>

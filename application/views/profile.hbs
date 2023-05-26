@@ -6,27 +6,23 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body>
-    <main>
-        <div id="view-profile">
-            <div id="profile-videos">
-                <ul class="display-user-videos"> <!-- list of videos ordered by date -->
-                    {{#each currentPosts}}
-                        {{> userpost this}}
-                    {{/each}}
-                </ul> <!-- list of videos END -->
+    <body>
+        <main>
+            <div id="view-profile">
+                <div id="profile-videos">
+                    <ul class="display-user-videos"> <!-- list of videos ordered by date -->
+                        {{#each currentPosts}}
+                            {{> userpost this}}
+                        {{/each}}
+                    </ul> <!-- list of videos END -->
+                </div>
+
+                <div id="profile-text">
+                    <h1 class="display-username">{{user.username}}</h1>
+                    <h3 class="display-email">{{user.email}}</h3>
+                </div>
             </div>
+        </main>
 
-            <div id="profile-text">
-                <h1 class="display-username">{{user.username}}</h1>
-                <h3 class="display-email">{{user.email}}</h3>
-            </div>
-        </div>
-    </main>
-
-<!--    <div id="top-footer-image">-->
-<!--        <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">-->
-<!--    </div>-->
-
-</body>
+    </body>
 </html>

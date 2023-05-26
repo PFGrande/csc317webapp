@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+    <body>
+        <main id="login-content">
+            <div id="login-page">
+                <!-- Submission Section -->
+                <form id="login-form" action="/users/login" method="POST" enctype="application/x-www-form-urlencoded">
+                    <label for="log-username">Username:</label>
+                    <input type="text" placeholder="Username" id="log-username" name="username">
 
-<body>
-    <main id="login-content">
-        <div id="login-page">
-            <!-- Submission Section -->
-            <form id="login-form" action="/users/login" method="POST" enctype="application/x-www-form-urlencoded">
-                <label for="log-username">Username:</label>
-                <input type="text" placeholder="Username" id="log-username" name="username">
+                    <label for="log-pass">Password:</label>
+                    <input type="password" placeholder="Password" id="log-pass" name="password">
 
-                <label for="log-pass">Password:</label>
-                <input type="password" placeholder="Password" id="log-pass" name="password">
+                    <input type="submit">
+                </form>
 
-                <input type="submit">
-            </form>
+                <div id="login-container">
+                    <img id="login-image" src="https://preview.redd.it/6fmtje0ghjz31.png?width=395&format=png&auto=webp&v=enabled&s=f5936ffb478d774a1e8303c1386fda55e783023f">
+                </div>
 
-            <div id="login-container">
-                <img id="login-image" src="https://preview.redd.it/6fmtje0ghjz31.png?width=395&format=png&auto=webp&v=enabled&s=f5936ffb478d774a1e8303c1386fda55e783023f">
             </div>
+        </main>
 
-        </div>
-    </main>
-    <!-- Submission Section END -->
-
-<!--    <div id="top-footer-image">-->
-<!--        <img id="smoki" src="../images/smoki.png" alt="image of a smoke grenade with eyes and arms smiling while waving">-->
-<!--    </div>-->
-
-</body>
+    </body>
 </html>
